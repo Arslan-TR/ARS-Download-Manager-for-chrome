@@ -111,7 +111,8 @@ A 30-second alarm restarts the background speed-limit loop if Chrome has suspend
 **Are you using remote code?** (*Uzak kod kullanıyor musunuz?*) → **No, I am not using remote code** (*Hayır*)
 
 **Data usage** (*Veri kullanımı*):
-- Leave **every** data-type checkbox **unchecked** (personally identifiable information, health, financial, authentication, personal communications, location, web history, user activity, website content). The extension does not collect or transmit any data.
+- Check **only Web history** (*Web geçmişi*). The extension reads download links and file names on the user's device; Google's policy says data handled locally must still be disclosed, even though nothing is transmitted.
+- Leave every other data-type checkbox **unchecked** (personally identifiable information, health, financial, authentication, personal communications, location, user activity, website content).
 - **Check all three** certifications:
   - I do not sell or transfer user data to third parties, outside of the approved use cases
   - I do not use or transfer user data for purposes that are unrelated to my item's single purpose

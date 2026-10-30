@@ -9,6 +9,8 @@
 - The extension makes **no network requests of its own**. Nothing is sent to the developer or to anyone else. There are no analytics, ads or trackers.
 - When you paste a link into "New download", Chrome downloads that file the same way it does when you click a download link.
 
+For the Chrome Web Store this local reading of download links and file names is declared as **web history** handled on the device; it is never transmitted.
+
 Permissions used: `downloads` (to see, pause, resume and start downloads), `storage` (to remember your settings), `alarms` (to keep the speed limiter running in the background).
 
 Questions: open an issue at https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/issues
@@ -25,6 +27,8 @@ Questions: open an issue at https://github.com/Arslan-TR/ARS-Download-Manager-fo
 - Ayarlarınız (hız sınırı, birim, dağıtım modu, dosya sınırları) Chrome'un eklenti depolama alanına **bilgisayarınızda** kaydedilir.
 - Eklenti **kendi başına hiçbir ağ isteği yapmaz**. Geliştiriciye veya başka birine hiçbir şey gönderilmez. Analiz, reklam veya izleyici yoktur.
 - "Yeni indirme"ye bir link yapıştırdığınızda Chrome o dosyayı, bir indirme linkine tıkladığınızda nasıl indiriyorsa öyle indirir.
+
+Chrome Web Store'da bu yerel okuma (indirme linkleri ve dosya adları) **web geçmişi** olarak beyan edilir; bilgisayarınızdan hiçbir yere gönderilmez.
 
 Kullanılan izinler: `downloads` (indirmeleri görmek, duraklatmak, sürdürmek ve başlatmak için), `storage` (ayarlarınızı hatırlamak için), `alarms` (hız sınırlayıcının arka planda çalışmaya devam etmesi için).
 

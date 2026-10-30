@@ -125,7 +125,7 @@ A 30-second alarm restarts the background speed-limit loop if Chrome has suspend
 
 **Are you using remote code?** → **No, I am not using remote code**
 
-**Data usage:** Listedeki kutuların **hiçbirini işaretlemeyin** (eklenti veri toplamıyor). Alttaki **üç taahhüt kutusunu işaretleyin**:
+**Data usage:** Sadece **Web geçmişi (Web history)** kutusunu işaretleyin. Eklenti indirme linklerini ve dosya adlarını bilgisayarınızda okuyor; Google, veri hiç gönderilmese bile bunun beyan edilmesini istiyor. Diğer kutular boş kalsın. Alttaki **üç taahhüt kutusunu işaretleyin**:
 - I do not sell or transfer user data to third parties…
 - I do not use or transfer user data for purposes that are unrelated to my item's single purpose
 - I do not use or transfer user data to determine creditworthiness or for lending purposes
