@@ -56,6 +56,10 @@ So data arrives in **bursts of several MB** followed by a pause that repays them
 - If a server still drops a paused connection, the extension tries to resume the download once (works when the server supports HTTP Range).
 - Only Chrome downloads are limited, not other tab or app traffic.
 
+## Privacy
+
+No data is collected or sent anywhere — see [docs/PRIVACY.md](docs/PRIVACY.md).
+
 ## Development
 
 No dependencies.
@@ -66,6 +70,7 @@ npm run test:e2e    # loads the extension in Chromium via Playwright, downloads 
 E2E_LANG=tr E2E_SHOTS=./out npm run test:e2e   # Turkish UI, save popup screenshots
 node scripts/make-icons.mjs                    # re-render icons/icon*.png from icons/icon.svg
 scripts/build-zip.sh                           # build dist/ARS-Download-Manager-v.<version>.zip
+node scripts/make-store-assets.mjs             # re-render docs/store/*.jpg from docs/store/src/
 ```
 
 The e2e run needs Playwright with Chromium available; it checks the limit, share/one-by-one modes, user pauses, releasing the limit, file integrity (SHA-256) and that no download reconnected.
@@ -92,4 +97,6 @@ lib/state.js         settings (storage.local) and our-paused set (storage.sessio
 popup.html/css/js    toolbar popup
 _locales/{en,tr}     UI strings
 docs/PRD.md          product requirements
+docs/PRIVACY.md      privacy policy (linked from the store listing)
+docs/store/          Chrome Web Store images, listing texts and publishing guide (YAYINLAMA.md)
 ```
