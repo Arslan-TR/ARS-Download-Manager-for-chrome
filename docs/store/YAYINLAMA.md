@@ -2,6 +2,8 @@
 
 Her adımda **ne tıklayacağınız** ve **ne yapıştıracağınız** yazıyor. Metinleri olduğu gibi kopyalayın.
 
+> 🤖 Formu bir yapay zekâya doldurtacaksanız ona şu dosyayı verin: [`STORE-FORM.md`](STORE-FORM.md) (tamamen İngilizce, alan alan).
+
 > 💰 **Ücret:** Eklenti **ücretsiz** yayınlanır, kullanıcılar ücretsiz indirir. Ama Google, mağazaya ilk kez eklenti koyan herkesten **bir kereye mahsus 5 $** geliştirici kayıt ücreti alır. ([Google'ın sayfası](https://developer.chrome.com/docs/webstore/register))
 >
 > ⏳ **Süre:** Gönderdikten sonra Google inceler. Genelde birkaç gün sürer; onaylanınca e-posta gelir.
@@ -89,7 +91,7 @@ Diğer alanlar:
 | **Homepage URL** | `https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome` |
 | **Support URL** | `https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/issues` |
 
-**Türkçe mağaza sayfası (isteğe bağlı ama önerilir):** Sayfanın üstündeki dil menüsünden **Türkçe**'yi ekleyin. Açıklamaya yukarıdaki metnin `----` çizgisinden sonraki Türkçe kısmını yapıştırın, görsel olarak da `screenshot-1-tr.jpg`, `screenshot-2-tr.jpg`, `screenshot-3-tr.jpg` ve `promo-440x280-tr.jpg` dosyalarını yükleyin.
+**Türkçe mağaza sayfası (isteğe bağlı; mağaza sayfası İngilizce, eklenti Türkçe de destekliyor):** Sayfanın üstündeki dil menüsünden **Türkçe**'yi ekleyin. Açıklamaya yukarıdaki metnin `----` çizgisinden sonraki Türkçe kısmını yapıştırın, görsel olarak da `screenshot-1-tr.jpg`, `screenshot-2-tr.jpg`, `screenshot-3-tr.jpg` ve `promo-440x280-tr.jpg` dosyalarını yükleyin.
 
 Görselleri bilgisayarınıza indirmek için: GitHub'da `docs/store` klasörüne girin → dosyaya tıklayın → sağ üstteki **indir (⬇)** düğmesi.
 
