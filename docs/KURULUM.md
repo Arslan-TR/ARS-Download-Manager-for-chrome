@@ -1,5 +1,7 @@
 # ARS Download Manager — Kurulum Rehberi
 
+*English: [INSTALL.md](INSTALL.md)*
+
 Bu rehber **hiç bilgisayar bilgisi olmayanlar** için yazıldı. Adımları sırayla yapın, hiçbirini atlamayın.
 Toplam süre: **yaklaşık 5 dakika.**
 
