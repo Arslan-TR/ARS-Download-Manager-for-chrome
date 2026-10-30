@@ -274,3 +274,17 @@ test('finished downloads are forgotten', () => {
   assert.equal(engine.items.size, 0);
   assert.equal(engine.ourPaused.size, 0);
 });
+
+test('plan reports total instant speed over running downloads only', () => {
+  const { log } = simulate({
+    downloads: [{ id: 1 }, { id: 2 }],
+    settings: { enabled: false, limitBps: 4 * MB, mode: 'share', perFile: {} },
+    seconds: 5,
+    lineRate: 8 * MB,
+    userPaused: [2],
+  });
+  const last = log.at(-1);
+  assert.ok(last.totalInstant > 6 * MB && last.totalInstant < 10 * MB, `instant ${last.totalInstant / MB}`);
+  assert.equal(last.stats.get(2).instantSpeed, 0);
+  assert.equal(last.totalInstant, last.stats.get(1).instantSpeed);
+});

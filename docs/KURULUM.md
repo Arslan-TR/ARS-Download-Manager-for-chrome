@@ -197,7 +197,12 @@ Her indirmenin yanında renkli küçük bir etiket vardır:
 
 Eklenti indirmeyi çok kısa aralıklarla durdurup devam ettirerek yavaşlatır.
 Bu yüzden indirme **parça parça** gelir: bazen hızlı, bazen hiç.
-Penceredeki hız **son 20 saniyenin ortalamasıdır** ve doğrudur. Anlık zıplamaları dert etmeyin.
+
+Listenin üstündeki satırda iki hız görürsünüz:
+- **Anlık:** Bütün indirmelerin **şu anki** toplam hızı. Sürekli zıplar (bazen `0 B/s`, bazen yüksek). Bu normaldir.
+- **ort.:** Son 20 saniyenin ortalaması. **Sınırınızla karşılaştırmanız gereken değer budur.**
+
+İndirmelerin yanındaki hızlar da 20 saniyelik ortalamadır.
 
 ---
 
@@ -215,7 +220,7 @@ Uyarıyı **kapatın** (✕). **"Devre dışı bırak" gibi bir düğmeye basmay
 
 **❓ Sınırı açtım ama indirme hâlâ çok hızlı.**
 → Pencerenin sağ üstündeki anahtarın **mavi** olduğundan emin olun.
-→ Hız 20 saniyelik ortalamadır, biraz bekleyin.
+→ Üst satırdaki **ort.** değerine bakın (Anlık değil) ve biraz bekleyin.
 → Çok hızlı bir internette çok düşük bir sınır koyduysanız (örneğin fiberde 0,5 MB/s), eklenti bağlantı kopmasın diye sınırı tam tutamayabilir. Sınırı biraz yükseltin.
 
 **❓ Microsoft Edge, Brave veya Opera'da çalışır mı?**

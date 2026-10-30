@@ -21,6 +21,9 @@ const els = {
   unit: $('unit'),
   limitError: $('limitError'),
   summary: $('summary'),
+  activeCount: $('activeCount'),
+  speedNow: $('speedNow'),
+  speedAvg: $('speedAvg'),
   list: $('list'),
   empty: $('empty'),
   tpl: $('itemTpl'),
@@ -29,6 +32,11 @@ const els = {
   cancelAll: $('cancelAll'),
 };
 const rows = new Map(); // download id -> <li>
+const ETA_FMT = {
+  h: (h, m) => t('etaHours', [String(h), String(m)]),
+  m: (m, s) => t('etaMinutes', [String(m), String(s)]),
+  s: (s) => t('etaSeconds', [String(s)]),
+};
 let state = null;
 
 function localize() {
@@ -103,7 +111,7 @@ function updateRow(li, d, unit) {
   let eta = Infinity;
   if (known && d.speed > 1) eta = (d.totalBytes - d.bytesReceived) / d.speed;
   else if (d.estimatedEndTime) eta = (new Date(d.estimatedEndTime) - Date.now()) / 1000;
-  li.querySelector('.eta').textContent = d.role === 'userPaused' ? '' : t('etaLeft', [formatEta(eta)]);
+  li.querySelector('.eta').textContent = d.role === 'userPaused' ? '' : t('etaLeft', [formatEta(eta, ETA_FMT)]);
 
   const url = li.querySelector('.url');
   url.textContent = d.url;
@@ -123,7 +131,7 @@ function updateRow(li, d, unit) {
 function render(next) {
   if (!next || next.error) return;
   state = next;
-  const { settings, downloads, totalSpeed } = next;
+  const { settings, downloads, totalSpeed, totalInstant } = next;
   renderSettings(settings);
 
   const seen = new Set();
@@ -147,7 +155,9 @@ function render(next) {
   const n = downloads.length;
   els.empty.hidden = n > 0;
   els.summary.hidden = n === 0;
-  els.summary.textContent = t('summary', [String(n), formatSpeed(totalSpeed)]);
+  els.activeCount.textContent = t('activeCount', [String(n)]);
+  els.speedNow.textContent = formatSpeed(totalInstant);
+  els.speedAvg.textContent = t('speedAvg', [formatSpeed(totalSpeed)]);
   for (const b of [els.pauseAll, els.resumeAll, els.cancelAll]) b.disabled = n === 0;
 }
 
@@ -159,15 +169,27 @@ async function refresh() {
   }
 }
 
+let errorTimer = null;
+function showLimitError(show) {
+  clearTimeout(errorTimer);
+  els.limitError.hidden = !show;
+  if (show) errorTimer = setTimeout(() => (els.limitError.hidden = true), 3000);
+}
+
 function commitLimit() {
   const bps = toBps(els.limit.value, els.unit.value);
-  els.limitError.hidden = bps != null;
-  if (bps == null) return;
+  showLimitError(bps == null);
+  if (bps == null) {
+    // Put the current limit back so the box never shows a value that isn't in effect.
+    if (state) els.limit.value = fromBps(state.settings.limitBps, state.settings.unit);
+    return;
+  }
   send({ type: 'setSettings', limitBps: bps, unit: els.unit.value }).then(render);
 }
 
 els.enabled.addEventListener('change', () => send({ type: 'setSettings', enabled: els.enabled.checked }).then(render));
 els.limit.addEventListener('change', commitLimit);
+els.limit.addEventListener('input', () => showLimitError(false));
 els.limit.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') els.limit.blur();
 });
@@ -179,7 +201,7 @@ els.unit.addEventListener('change', () => {
 });
 for (const chip of document.querySelectorAll('[data-preset]')) {
   chip.addEventListener('click', () => {
-    els.limitError.hidden = true;
+    showLimitError(false);
     send({ type: 'setSettings', enabled: true, limitBps: toBps(chip.dataset.preset, 'MBps'), unit: 'MBps' }).then(render);
   });
 }

@@ -51,3 +51,11 @@ test('badgeText is short enough for the toolbar badge', () => {
     assert.ok(badgeText(v).length <= 4, `${badgeText(v)} too long`);
   }
 });
+
+test('formatEta takes localized patterns', () => {
+  const tr = { h: (h, m) => `${h} sa ${m} dk`, m: (m, s) => `${m} dk ${s} sn`, s: (s) => `${s} sn` };
+  assert.equal(formatEta(102, tr), '1 dk 42 sn');
+  assert.equal(formatEta(3725, tr), '1 sa 2 dk');
+  assert.equal(formatEta(9, tr), '9 sn');
+  assert.equal(formatEta(Infinity, tr), '∞');
+});

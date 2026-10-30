@@ -195,7 +195,12 @@ Each download has a small colored label next to it:
 
 The extension slows a download down by stopping and restarting it at short intervals.
 So the download arrives **in chunks**: sometimes fast, sometimes nothing.
-The speed shown in the window is the **average over the last 20 seconds**, and it is accurate. Don't worry about the jumps.
+
+The line above the list shows two speeds:
+- **Now:** the total speed of all downloads **right now**. It jumps around (sometimes `0 B/s`, sometimes high). That's normal.
+- **avg:** the average over the last 20 seconds. **This is the number to compare with your limit.**
+
+The speed next to each download is a 20-second average too.
 
 ---
 
@@ -213,7 +218,7 @@ The speed shown in the window is the **average over the last 20 seconds**, and i
 
 **❓ I turned the limit on, but the download is still very fast.**
 → Make sure the switch in the top right of the window is **blue**.
-→ The speed is a 20-second average; wait a little.
+→ Look at the **avg** value in the top line (not "Now") and wait a little.
 → If you set a very low limit on a very fast connection (for example 0.5 MB/s on fiber), the extension may not hold it exactly, so that the connection doesn't drop. Raise the limit a bit.
 
 **❓ Does it work in Microsoft Edge, Brave or Opera?**

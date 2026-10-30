@@ -83,6 +83,7 @@ async function getState() {
   return {
     settings,
     totalSpeed: lastPlan?.totalSpeed ?? 0,
+    totalInstant: lastPlan?.totalInstant ?? 0,
     downloads: downloads.map((d) => {
       const s = lastPlan?.stats.get(d.id);
       return {
