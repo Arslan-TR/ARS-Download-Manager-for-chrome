@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ARS Download Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="icons/icon32.png" alt="" width="20" height="20">
+      <span data-i18n="extName"></span>
+    </div>
+    <label class="switch" data-i18n-title="toggleLabel">
+      <input type="checkbox" id="enabled" data-i18n-aria="toggleLabel">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <section class="controls" id="controls">
+    <div class="row">
+      <label for="limit" class="label" data-i18n="limiterLabel"></label>
+      <div class="limit-input">
+        <input type="number" id="limit" min="0" step="any" inputmode="decimal">
+        <select id="unit">
+          <option value="KBps">KB/s</option>
+          <option value="MBps">MB/s</option>
+          <option value="Mbps">Mbps</option>
+        </select>
+      </div>
+    </div>
+    <p class="error" id="limitError" hidden data-i18n="invalidLimit"></p>
+    <div class="presets" role="group" data-i18n-aria="presetsLabel">
+      <button type="button" class="chip" data-preset="1">1 MB/s</button>
+      <button type="button" class="chip" data-preset="2">2 MB/s</button>
+      <button type="button" class="chip" data-preset="5">5 MB/s</button>
+      <button type="button" class="chip" data-preset="10">10 MB/s</button>
+    </div>
+    <div class="row">
+      <span class="label" data-i18n="modeLabel"></span>
+      <div class="segmented" role="radiogroup">
+        <button type="button" role="radio" data-mode="share" data-i18n="modeShare" data-i18n-title="modeShareHint"></button>
+        <button type="button" role="radio" data-mode="sequential" data-i18n="modeSequential" data-i18n-title="modeSequentialHint"></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="summary" id="summary"></div>
+
+  <ul class="list" id="list"></ul>
+  <p class="empty" id="empty" data-i18n="emptyList" hidden></p>
+
+  <footer class="actions">
+    <button type="button" id="pauseAll" data-i18n="pauseAll"></button>
+    <button type="button" id="resumeAll" data-i18n="resumeAll"></button>
+    <button type="button" id="cancelAll" class="danger" data-i18n="cancelAll"></button>
+  </footer>
+
+  <template id="itemTpl">
+    <li class="item">
+      <div class="item-head">
+        <span class="name"></span>
+        <span class="badge"></span>
+      </div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="meta">
+        <span class="progress"></span>
+        <span class="speed"></span>
+        <span class="eta"></span>
+      </div>
+      <div class="url"></div>
+      <div class="item-actions">
+        <label class="perfile">
+          <span class="perfile-label"></span>
+          <input type="number" min="0" step="any" inputmode="decimal" class="perfile-input">
+          <span class="perfile-unit"></span>
+        </label>
+        <div class="buttons">
+          <button type="button" class="icon toggle-pause">
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10-6.5a1 1 0 0 0 0-1.72l-10-6.5A1 1 0 0 0 8 5.5z"/></svg>
+          </button>
+          <button type="button" class="icon cancel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 5.3 12 10.6l5.3-5.3 1.4 1.4-5.3 5.3 5.3 5.3-1.4 1.4-5.3-5.3-5.3 5.3-1.4-1.4 5.3-5.3-5.3-5.3z"/></svg>
+          </button>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

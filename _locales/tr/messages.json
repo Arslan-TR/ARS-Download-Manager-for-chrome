@@ -1,0 +1,39 @@
+{
+  "extName": { "message": "ARS Download Manager" },
+  "extDescription": { "message": "Aktif Chrome indirmelerini iptal etmeden veya yeniden başlatmadan hız sınırı uygulayın." },
+  "limiterLabel": { "message": "Hız sınırı" },
+  "toggleLabel": { "message": "Hız sınırını aç veya kapat" },
+  "modeLabel": { "message": "Dağıtım" },
+  "modeShare": { "message": "Paylaştır" },
+  "modeShareHint": { "message": "Sınır eşit bölünür; kullanılmayan pay diğerlerine geçer." },
+  "modeSequential": { "message": "Sırayla" },
+  "modeSequentialHint": { "message": "Bant genişliğini tek indirme kullanır; diğerleri bağlantıları kopmasın diye salyangoz hızında ilerler." },
+  "presetsLabel": { "message": "Hazır değerler" },
+  "invalidLimit": { "message": "Pozitif bir sayı girin." },
+  "summary": {
+    "message": "$COUNT$ aktif · toplam $SPEED$",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "speed": { "content": "$2" }
+    }
+  },
+  "emptyList": { "message": "Aktif indirme yok." },
+  "roleThrottled": { "message": "Kısıtlanıyor" },
+  "roleHead": { "message": "Öncelikli" },
+  "roleSnail": { "message": "Salyangoz" },
+  "roleFree": { "message": "Sınırsız" },
+  "roleUserPaused": { "message": "Duraklatıldı" },
+  "etaLeft": {
+    "message": "$TIME$ kaldı",
+    "placeholders": { "time": { "content": "$1" } }
+  },
+  "perFileLabel": { "message": "Dosya sınırı" },
+  "perFilePlaceholder": { "message": "yok" },
+  "pause": { "message": "Duraklat" },
+  "resume": { "message": "Devam" },
+  "cancel": { "message": "İptal" },
+  "pauseAll": { "message": "Tümünü duraklat" },
+  "resumeAll": { "message": "Tümünü sürdür" },
+  "cancelAll": { "message": "Tümünü iptal et" },
+  "confirmCancelAll": { "message": "Emin misiniz? Tekrar tıklayın" }
+}

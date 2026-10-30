@@ -1,0 +1,39 @@
+{
+  "extName": { "message": "ARS Download Manager" },
+  "extDescription": { "message": "Limit the speed of active Chrome downloads without cancelling or restarting them." },
+  "limiterLabel": { "message": "Speed limit" },
+  "toggleLabel": { "message": "Turn the speed limit on or off" },
+  "modeLabel": { "message": "Distribution" },
+  "modeShare": { "message": "Share" },
+  "modeShareHint": { "message": "The limit is split evenly; unused share goes to the others." },
+  "modeSequential": { "message": "One by one" },
+  "modeSequentialHint": { "message": "One download gets the bandwidth; the rest crawl in snail mode so their connections stay alive." },
+  "presetsLabel": { "message": "Presets" },
+  "invalidLimit": { "message": "Enter a positive number." },
+  "summary": {
+    "message": "$COUNT$ active · total $SPEED$",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "speed": { "content": "$2" }
+    }
+  },
+  "emptyList": { "message": "No active downloads." },
+  "roleThrottled": { "message": "Limited" },
+  "roleHead": { "message": "Priority" },
+  "roleSnail": { "message": "Snail" },
+  "roleFree": { "message": "Unlimited" },
+  "roleUserPaused": { "message": "Paused" },
+  "etaLeft": {
+    "message": "$TIME$ left",
+    "placeholders": { "time": { "content": "$1" } }
+  },
+  "perFileLabel": { "message": "File limit" },
+  "perFilePlaceholder": { "message": "none" },
+  "pause": { "message": "Pause" },
+  "resume": { "message": "Resume" },
+  "cancel": { "message": "Cancel" },
+  "pauseAll": { "message": "Pause all" },
+  "resumeAll": { "message": "Resume all" },
+  "cancelAll": { "message": "Cancel all" },
+  "confirmCancelAll": { "message": "Sure? Click again" }
+}
