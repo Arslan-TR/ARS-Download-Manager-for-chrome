@@ -123,16 +123,27 @@ Let's make the extension's icon visible so it's easy to open.
 
 ![Extension window](popup-en.png)
 
+To open the extension, click the **blue down-arrow icon** at the top right. A list of all your downloads opens.
+
 ### Limiting the speed (the basics)
 
-1. Click the **blue down-arrow icon** at the top right. A small window opens.
-2. Turn on the **switch in the top right of the window**. It should turn blue.
-3. Click one of the ready-made buttons: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** or **`10 MB/s`**.
+1. Click the **snail (🐌)** button in the **bottom left corner** of the window.
+2. The button turns **orange** and shows the limit, for example **`4 MB/s`**.
 
-That's it! Your downloads will no longer go faster than the speed you picked.
-To remove the limit, turn the switch off again.
+That's it! Your downloads will no longer go faster than that.
+To remove the limit, click the snail **again**. The button turns gray and says **"No limit"**.
 
 > 💡 **Tip:** While the limit is on, you'll see small text on the extension icon. For example **`2M`** = "2 MB/s limit is on."
+
+---
+
+### Changing the limit
+
+1. Click the **small arrow (˄)** in the **bottom right corner** of the window. (The **≡** button at the top right does the same.)
+2. A settings panel opens. Click one of the ready-made buttons: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** or **`10 MB/s`**.
+3. To type your own value: write the number in the **"Limit"** box and press **Enter**.
+   You can also choose the unit from the small menu next to it: **KB/s**, **MB/s** or **Mbps**.
+4. To close the panel, click the arrow again or press **Esc** on your keyboard.
 
 ---
 
@@ -149,14 +160,11 @@ Internet plans are usually sold in **Mbps** (for example "50 Mbps"). The buttons
 | 100 Mbps | ~12 MB/s | **5 MB/s** |
 | 1000 Mbps (fiber) | ~120 MB/s | **10 MB/s** or more |
 
-To type your own value: write the number in the **"Speed limit"** box and press **Enter**.
-You can also choose the unit from the small menu next to it: **KB/s**, **MB/s** or **Mbps**.
-
 ---
 
 ### The "Distribution" setting: Share or One by one?
 
-This setting only matters when you download **more than one file at the same time**.
+This setting is also in the panel opened with **˄**. It only matters when you download **more than one file at the same time**.
 
 - **Share:** The speed is split **equally** between all downloads. They all move forward together.
   *Example: limit is 4 MB/s, 2 downloads → about 2 MB/s each.*
@@ -167,9 +175,45 @@ If you're not sure, leave it on **Share**.
 
 ---
 
-### What do the labels in the list mean?
+### The buttons at the top
 
-Each download has a small colored label next to it:
+From left to right:
+
+| Button | What it does |
+|---|---|
+| **+** (blue) | **New download.** Paste a download link and click **Download**. |
+| **▶** | **Resumes** the selected downloads. If nothing is selected, resumes **all** of them. |
+| **⏸** | **Pauses** the selected downloads. If nothing is selected, pauses **all** of them. |
+| **🗑** | **Removes** the selected downloads **from the list.** The files on your computer are **not deleted.** So you don't press it by accident, you have to click it **twice**. |
+| **📁** | Opens your Downloads folder. If one finished file is selected, shows that file in its folder. |
+| **Search** box | Searches by file name. |
+| **≡** | Opens the speed limit settings. |
+
+---
+
+### Tabs
+
+Above the list there are tabs: **All, Active, Completed, Images, Video, Music, Documents, Archives.**
+Click a tab to see only that kind of download. The number in brackets is how many downloads are in that tab.
+If they don't all fit, hover over the tabs and turn the **mouse wheel** to scroll sideways.
+
+---
+
+### Each row in the list
+
+- **☐ Checkbox:** selects that download. The buttons at the top act on what you select.
+  The checkbox at the very top selects **everything** shown.
+- **The small button in the row:**
+  - **⏸** pauses a download in progress, **▶** continues it.
+  - **📁** shows a finished file in its folder.
+  - **↻** **retries** a failed or canceled download.
+- **Colored label** (MP4, ISO, PDF…): the type of file.
+- **Size** column: percentage and progress bar while downloading, the file size when finished.
+- **Click the file name once:** the download link and a **File limit** box open underneath.
+  **File limit** puts a separate speed limit on **just that file**. Leave it empty for no separate limit.
+- **Double-click** the name of a finished file: shows the file in its folder.
+
+Files that are downloading also have a small colored label:
 
 | Label | Meaning |
 |---|---|
@@ -181,23 +225,13 @@ Each download has a small colored label next to it:
 
 ---
 
-### Other buttons
-
-- **⏸ / ▶** (next to each download): pauses or resumes that download.
-- **✕** (next to each download): **cancels** that download.
-- **File limit** box: puts a separate speed limit on **just that file**. Leave it empty for no separate limit.
-- **Pause all / Resume all:** stops or continues all downloads at once.
-- **Cancel all:** cancels all downloads. So you don't press it by accident, you have to **click it twice**.
-
----
-
 ### "Why does the speed jump around?" — That's normal!
 
 The extension slows a download down by stopping and restarting it at short intervals.
 So the download arrives **in chunks**: sometimes fast, sometimes nothing.
 
-The line above the list shows two speeds:
-- **Now:** the total speed of all downloads **right now**. It jumps around (sometimes `0 B/s`, sometimes high). That's normal.
+The **green box (↓)** in the bottom bar shows two speeds:
+- **The big number:** the total speed of all downloads **right now**. It jumps around (sometimes `0 B/s`, sometimes high). That's normal.
 - **avg:** the average over the last 20 seconds. **This is the number to compare with your limit.**
 
 The speed next to each download is a 20-second average too.
@@ -217,8 +251,8 @@ The speed next to each download is a 20-second average too.
 → Most likely you deleted or moved the folder. Put the folder back, or do Part 1 again from the start.
 
 **❓ I turned the limit on, but the download is still very fast.**
-→ Make sure the switch in the top right of the window is **blue**.
-→ Look at the **avg** value in the top line (not "Now") and wait a little.
+→ Make sure the snail (🐌) button at the bottom left is **orange**.
+→ Look at the **avg** value in the green box at the bottom (not the big number) and wait a little.
 → If you set a very low limit on a very fast connection (for example 0.5 MB/s on fiber), the extension may not hold it exactly, so that the connection doesn't drop. Raise the limit a bit.
 
 **❓ Does it work in Microsoft Edge, Brave or Opera?**

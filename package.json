@@ -1,6 +1,6 @@
 {
   "name": "ars-download-manager",
-  "version": "0.26.2",
+  "version": "0.27.0",
   "private": true,
   "description": "Chrome MV3 extension that throttles active downloads without cancelling them.",
   "type": "module",

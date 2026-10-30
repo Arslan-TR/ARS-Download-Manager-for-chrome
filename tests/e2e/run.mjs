@@ -100,7 +100,7 @@ try {
   await sleep(4000);
   if (shots) {
     const page = await ctx.newPage();
-    await page.setViewportSize({ width: 380, height: 560 });
+    await page.setViewportSize({ width: 600, height: 580 });
     await page.goto(`chrome-extension://${extId}/popup.html`);
     await sleep(1500);
     await page.screenshot({ path: path.join(shots, `popup-${lang}.png`), fullPage: true });

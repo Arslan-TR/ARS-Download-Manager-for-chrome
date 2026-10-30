@@ -125,16 +125,27 @@ Eklentiyi kolay açabilmek için ikonunu görünür yapalım.
 
 ![Eklenti penceresi](popup-tr.png)
 
+Eklentiyi açmak için sağ üstteki **mavi, aşağı oklu ikona** tıklayın. Bütün indirmelerinizin listesi açılır.
+
 ### Hızı sınırlamak (en temel kullanım)
 
-1. Sağ üstteki **mavi aşağı oklu ikona** tıklayın. Küçük bir pencere açılır.
-2. Pencerenin **sağ üstündeki anahtarı** açın. Mavi olmalı.
-3. Hazır düğmelerden birine tıklayın: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** veya **`10 MB/s`**.
+1. Pencerenin **sol alt köşesindeki salyangoz (🐌)** düğmesine tıklayın.
+2. Düğme **turuncu** olur ve üzerinde sınır yazar, örneğin **`4 MB/s`**.
 
-Bu kadar! İndirmeleriniz artık seçtiğiniz hızı geçmez.
-Sınırı kaldırmak için anahtarı tekrar kapatın.
+Bu kadar! İndirmeleriniz artık bu hızı geçmez.
+Sınırı kaldırmak için salyangoza **tekrar** tıklayın. Düğme gri olur ve **"Sınır yok"** yazar.
 
 > 💡 **İpucu:** Sınır açıkken eklenti ikonunun üzerinde küçük bir yazı görürsünüz. Örneğin **`2M`** = "2 MB/s sınırı açık."
+
+---
+
+### Sınırın değerini değiştirmek
+
+1. Pencerenin **sağ alt köşesindeki küçük ok (˄)** düğmesine tıklayın. (Sağ üstteki **≡** düğmesi de aynı işi yapar.)
+2. Bir ayar paneli açılır. Hazır düğmelerden birine tıklayın: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** veya **`10 MB/s`**.
+3. Kendi değerinizi yazmak isterseniz: **"Sınır"** kutusuna sayıyı yazın ve **Enter**'a basın.
+   Yanındaki küçük menüden birimi de seçebilirsiniz: **KB/s**, **MB/s** veya **Mbps**.
+4. Paneli kapatmak için oka tekrar tıklayın ya da klavyede **Esc**'ye basın.
 
 ---
 
@@ -151,14 +162,11 @@ Sınırı kaldırmak için anahtarı tekrar kapatın.
 | 100 Mbps | ~12 MB/s | **5 MB/s** |
 | 1000 Mbps (fiber) | ~120 MB/s | **10 MB/s** veya daha fazlası |
 
-Kendi değerinizi yazmak isterseniz: **"Hız sınırı"** kutusuna sayıyı yazın ve **Enter**'a basın.
-Yanındaki küçük menüden birimi de seçebilirsiniz: **KB/s**, **MB/s** veya **Mbps**.
-
 ---
 
 ### "Dağıtım" ayarı: Paylaştır mı, Sırayla mı?
 
-Bu ayar sadece **aynı anda birden fazla dosya** indirirken önemlidir.
+Bu ayar da **˄** ile açılan paneldedir. Sadece **aynı anda birden fazla dosya** indirirken önemlidir.
 
 - **Paylaştır:** Hız bütün indirmelere **eşit** bölünür. Hepsi aynı anda ilerler.
   *Örnek: Sınır 4 MB/s, 2 indirme var → her biri ~2 MB/s.*
@@ -169,9 +177,45 @@ Emin değilseniz **Paylaştır**'da bırakın.
 
 ---
 
-### Listedeki etiketler ne anlama geliyor?
+### Üstteki düğmeler
 
-Her indirmenin yanında renkli küçük bir etiket vardır:
+Soldan sağa:
+
+| Düğme | Ne yapar? |
+|---|---|
+| **+** (mavi) | **Yeni indirme.** Bir indirme linkini yapıştırıp **İndir**'e basın. |
+| **▶** | Seçili indirmeleri **sürdürür**. Hiçbiri seçili değilse **hepsini** sürdürür. |
+| **⏸** | Seçili indirmeleri **duraklatır**. Hiçbiri seçili değilse **hepsini** duraklatır. |
+| **🗑** | Seçili indirmeleri **listeden kaldırır.** Bilgisayarınızdaki dosyalar **silinmez.** Yanlışlıkla basmayın diye **iki kere** tıklamanız gerekir. |
+| **📁** | İndirilenler klasörünü açar. Tek bir bitmiş dosya seçiliyse o dosyayı klasörde gösterir. |
+| **Ara** kutusu | Dosya adına göre arar. |
+| **≡** | Hız sınırı ayarlarını açar. |
+
+---
+
+### Sekmeler
+
+Listenin üstünde sekmeler vardır: **Tümü, Aktif, Tamamlanan, Resimler, Video, Müzik, Belgeler, Arşivler.**
+Bir sekmeye tıklayınca sadece o türdeki indirmeler görünür. Parantez içindeki sayı, o sekmede kaç indirme olduğudur.
+Hepsi sığmazsa, sekmelerin üzerindeyken **fare tekerleğini** çevirerek yana kaydırın.
+
+---
+
+### Listedeki her satır
+
+- **☐ Kutucuk:** O indirmeyi seçer. Üstteki düğmeler seçtiklerinize uygulanır.
+  En üstteki kutucuk, görünen **hepsini** birden seçer.
+- **Satırdaki küçük düğme:**
+  - **⏸** inen dosyayı duraklatır, **▶** devam ettirir.
+  - **📁** bitmiş dosyayı klasörde gösterir.
+  - **↻** başarısız ya da iptal edilmiş indirmeyi **yeniden dener**.
+- **Renkli etiket** (MP4, ISO, PDF…): dosyanın türü.
+- **Boyut** sütunu: inerken yüzde ve ilerleme çubuğu, bitince dosyanın boyutu.
+- Dosyanın **adına bir kez tıklayın:** altında indirme linki ve **Dosya sınırı** kutusu açılır.
+  **Dosya sınırı** sadece **o dosyaya** ayrı bir hız sınırı koyar. Boş bırakırsanız ayrı sınır olmaz.
+- Bitmiş bir dosyanın adına **çift tıklayın:** dosyayı klasörde gösterir.
+
+İnen dosyaların altında renkli küçük bir etiket de vardır:
 
 | Etiket | Anlamı |
 |---|---|
@@ -183,23 +227,13 @@ Her indirmenin yanında renkli küçük bir etiket vardır:
 
 ---
 
-### Diğer düğmeler
-
-- **⏸ / ▶** (her indirmenin yanında): O indirmeyi duraklatır veya devam ettirir.
-- **✕** (her indirmenin yanında): O indirmeyi **iptal eder.**
-- **Dosya sınırı** kutusu: Sadece **o dosyaya** ayrı bir hız sınırı koyar. Boş bırakırsanız ayrı sınır olmaz.
-- **Tümünü duraklat / Tümünü sürdür:** Bütün indirmeleri birden durdurur veya devam ettirir.
-- **Tümünü iptal et:** Bütün indirmeleri iptal eder. Yanlışlıkla basmayın diye **iki kere tıklamanız** gerekir.
-
----
-
 ### "Hız neden zıplıyor?" — Bu normal!
 
 Eklenti indirmeyi çok kısa aralıklarla durdurup devam ettirerek yavaşlatır.
 Bu yüzden indirme **parça parça** gelir: bazen hızlı, bazen hiç.
 
-Listenin üstündeki satırda iki hız görürsünüz:
-- **Anlık:** Bütün indirmelerin **şu anki** toplam hızı. Sürekli zıplar (bazen `0 B/s`, bazen yüksek). Bu normaldir.
+Alt çubuktaki **yeşil kutuda (↓)** iki hız görürsünüz:
+- **Büyük yazan sayı:** Bütün indirmelerin **şu anki** toplam hızı. Sürekli zıplar (bazen `0 B/s`, bazen yüksek). Bu normaldir.
 - **ort.:** Son 20 saniyenin ortalaması. **Sınırınızla karşılaştırmanız gereken değer budur.**
 
 İndirmelerin yanındaki hızlar da 20 saniyelik ortalamadır.
@@ -219,8 +253,8 @@ Uyarıyı **kapatın** (✕). **"Devre dışı bırak" gibi bir düğmeye basmay
 → Büyük ihtimalle klasörü sildiniz ya da taşıdınız. Klasörü geri koyun veya Bölüm 1'i baştan yapın.
 
 **❓ Sınırı açtım ama indirme hâlâ çok hızlı.**
-→ Pencerenin sağ üstündeki anahtarın **mavi** olduğundan emin olun.
-→ Üst satırdaki **ort.** değerine bakın (Anlık değil) ve biraz bekleyin.
+→ Sol alttaki salyangoz (🐌) düğmesinin **turuncu** olduğundan emin olun.
+→ Alttaki yeşil kutuda **ort.** değerine bakın (büyük sayıya değil) ve biraz bekleyin.
 → Çok hızlı bir internette çok düşük bir sınır koyduysanız (örneğin fiberde 0,5 MB/s), eklenti bağlantı kopmasın diye sınırı tam tutamayabilir. Sınırı biraz yükseltin.
 
 **❓ Microsoft Edge, Brave veya Opera'da çalışır mı?**

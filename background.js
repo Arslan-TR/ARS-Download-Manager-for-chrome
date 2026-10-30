@@ -77,48 +77,85 @@ function updateBadge() {
   chrome.action.setBadgeTextColor?.({ color: '#ffffff' });
 }
 
+// How many past downloads the list shows, newest first.
+const HISTORY_LIMIT = 200;
+
 async function getState() {
   await ready;
-  const downloads = await chrome.downloads.search({ state: 'in_progress', orderBy: ['startTime'] });
+  const downloads = await chrome.downloads.search({ orderBy: ['-startTime'], limit: HISTORY_LIMIT });
   return {
     settings,
     totalSpeed: lastPlan?.totalSpeed ?? 0,
     totalInstant: lastPlan?.totalInstant ?? 0,
-    downloads: downloads.map((d) => {
-      const s = lastPlan?.stats.get(d.id);
-      return {
-        id: d.id,
-        filename: d.filename,
-        url: d.finalUrl || d.url,
-        totalBytes: d.totalBytes,
-        bytesReceived: d.bytesReceived,
-        paused: d.paused,
-        estimatedEndTime: d.estimatedEndTime ?? null,
-        role: s?.role ?? (d.paused ? 'userPaused' : 'free'),
-        speed: s?.speed ?? 0,
-        allocation: s?.allocation ?? null,
-        perFileBps: settings.perFile[d.id] ?? null,
-      };
-    }),
+    downloads: downloads
+      .filter((d) => d.filename || d.state === 'in_progress')
+      .map((d) => {
+        const s = d.state === 'in_progress' ? lastPlan?.stats.get(d.id) : null;
+        return {
+          id: d.id,
+          filename: d.filename,
+          url: d.finalUrl || d.url,
+          mime: d.mime,
+          state: d.state,
+          // Only the user's pauses count as paused in the list; the limiter's
+          // own short pauses are part of a running, limited download.
+          paused: s ? s.role === 'userPaused' : d.paused,
+          error: d.error ?? null,
+          exists: d.exists,
+          canResume: d.canResume,
+          totalBytes: d.totalBytes,
+          fileSize: d.fileSize,
+          bytesReceived: d.bytesReceived,
+          estimatedEndTime: d.estimatedEndTime ?? null,
+          role: s?.role ?? (d.paused ? 'userPaused' : 'free'),
+          speed: s?.speed ?? 0,
+          instantSpeed: s?.instantSpeed ?? 0,
+          allocation: s?.allocation ?? null,
+          perFileBps: settings.perFile[d.id] ?? null,
+        };
+      }),
   };
 }
 
-async function control(op, id) {
+// Applies a popup action to the given ids, or to every active download when
+// none are given (pause/resume/cancel all).
+async function control(op, ids) {
   const targets =
-    id != null ? [id] : (await chrome.downloads.search({ state: 'in_progress' })).map((d) => d.id);
+    ids?.length > 0 ? ids : (await chrome.downloads.search({ state: 'in_progress' })).map((d) => d.id);
   await Promise.allSettled(
-    targets.map((t) => {
+    targets.map(async (t) => {
       // A pause or resume from the popup is the user's: drop any pause of
       // ours so the engine treats the download accordingly.
       engine.ourPaused.delete(t);
       if (op === 'pause') return chrome.downloads.pause(t);
       if (op === 'resume') return chrome.downloads.resume(t);
       if (op === 'cancel') return chrome.downloads.cancel(t);
+      if (op === 'retry') {
+        // Pick an interrupted download back up, or start it over if Chrome can't.
+        const [d] = await chrome.downloads.search({ id: t });
+        if (d?.canResume) return chrome.downloads.resume(t);
+        if (d) return chrome.downloads.download({ url: d.url });
+        return null;
+      }
+      if (op === 'erase') {
+        // Removes the entry from the list; the file on disk stays.
+        const [d] = await chrome.downloads.search({ id: t });
+        if (d?.state === 'in_progress') await chrome.downloads.cancel(t);
+        return chrome.downloads.erase({ id: t });
+      }
       return null;
     }),
   );
   await persistOurPaused();
   kick();
+}
+
+function isDownloadableUrl(url) {
+  try {
+    return ['http:', 'https:', 'ftp:'].includes(new URL(url).protocol);
+  } catch {
+    return false;
+  }
 }
 
 async function handleMessage(msg) {
@@ -143,8 +180,17 @@ async function handleMessage(msg) {
       return getState();
     }
     case 'control':
-      await control(msg.op, msg.id ?? null);
+      await control(msg.op, msg.ids ?? (msg.id != null ? [msg.id] : null));
       return getState();
+    case 'show':
+      if (msg.id != null) chrome.downloads.show(msg.id);
+      else chrome.downloads.showDefaultFolder();
+      return { ok: true };
+    case 'download': {
+      if (!isDownloadableUrl(msg.url)) return { error: 'invalidUrl' };
+      await chrome.downloads.download({ url: msg.url });
+      return getState();
+    }
     default:
       return { error: 'unknown message' };
   }

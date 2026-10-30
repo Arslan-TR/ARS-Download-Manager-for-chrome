@@ -33,7 +33,7 @@
     "message": "Pozitif bir sayı girin."
   },
   "emptyList": {
-    "message": "Aktif indirme yok."
+    "message": "Burada indirme yok."
   },
   "roleThrottled": {
     "message": "Kısıtlanıyor"
@@ -69,32 +69,6 @@
   },
   "resume": {
     "message": "Devam"
-  },
-  "cancel": {
-    "message": "İptal"
-  },
-  "pauseAll": {
-    "message": "Tümünü duraklat"
-  },
-  "resumeAll": {
-    "message": "Tümünü sürdür"
-  },
-  "cancelAll": {
-    "message": "Tümünü iptal et"
-  },
-  "confirmCancelAll": {
-    "message": "Emin misiniz? Tekrar tıklayın"
-  },
-  "activeCount": {
-    "message": "$COUNT$ aktif",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "speedNow": {
-    "message": "Anlık"
   },
   "speedAvg": {
     "message": "ort. $SPEED$",
@@ -133,5 +107,109 @@
         "content": "$1"
       }
     }
+  },
+  "addDownload": {
+    "message": "Yeni indirme"
+  },
+  "resumeSelected": {
+    "message": "Sürdür (seçilenler; seçim yoksa tümü)"
+  },
+  "pauseSelected": {
+    "message": "Duraklat (seçilenler; seçim yoksa tümü)"
+  },
+  "removeSelected": {
+    "message": "Seçilenleri listeden kaldır (dosyalar silinmez)"
+  },
+  "confirmRemove": {
+    "message": "Kaldırmak için tekrar tıklayın"
+  },
+  "openFolder": {
+    "message": "Klasörde göster"
+  },
+  "search": {
+    "message": "Ara"
+  },
+  "limitSettings": {
+    "message": "Hız sınırı ayarları"
+  },
+  "urlPlaceholder": {
+    "message": "İndirme linkini yapıştırın (https://…)"
+  },
+  "download": {
+    "message": "İndir"
+  },
+  "close": {
+    "message": "Kapat"
+  },
+  "invalidUrl": {
+    "message": "http:// veya https:// ile başlayan bir link girin"
+  },
+  "tabAll": {
+    "message": "Tümü"
+  },
+  "tabActive": {
+    "message": "Aktif"
+  },
+  "tabCompleted": {
+    "message": "Tamamlanan"
+  },
+  "tabImage": {
+    "message": "Resimler"
+  },
+  "tabVideo": {
+    "message": "Video"
+  },
+  "tabAudio": {
+    "message": "Müzik"
+  },
+  "tabDocument": {
+    "message": "Belgeler"
+  },
+  "tabArchive": {
+    "message": "Arşivler"
+  },
+  "colName": {
+    "message": "Ad"
+  },
+  "colSize": {
+    "message": "Boyut"
+  },
+  "selectAll": {
+    "message": "Tümünü seç"
+  },
+  "select": {
+    "message": "Seç"
+  },
+  "statusFailed": {
+    "message": "Başarısız"
+  },
+  "statusCanceled": {
+    "message": "İptal edildi"
+  },
+  "statusMissing": {
+    "message": "Dosya silinmiş"
+  },
+  "retry": {
+    "message": "Yeniden dene"
+  },
+  "limitValue": {
+    "message": "Sınır"
+  },
+  "noLimit": {
+    "message": "Sınır yok"
+  },
+  "snailOnHint": {
+    "message": "Hız sınırı açık ($LIMIT$). Kapatmak için tıklayın.",
+    "placeholders": {
+      "limit": {
+        "content": "$1"
+      }
+    }
+  },
+  "snailOffHint": {
+    "message": "Hız sınırı kapalı. Açmak için tıklayın."
+  },
+  "speedNowHint": {
+    "message": "Şu anki toplam indirme hızı (ort. = son 20 saniye)"
   }
 }

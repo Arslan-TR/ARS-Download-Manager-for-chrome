@@ -33,7 +33,7 @@
     "message": "Enter a positive number."
   },
   "emptyList": {
-    "message": "No active downloads."
+    "message": "No downloads here."
   },
   "roleThrottled": {
     "message": "Limited"
@@ -69,32 +69,6 @@
   },
   "resume": {
     "message": "Resume"
-  },
-  "cancel": {
-    "message": "Cancel"
-  },
-  "pauseAll": {
-    "message": "Pause all"
-  },
-  "resumeAll": {
-    "message": "Resume all"
-  },
-  "cancelAll": {
-    "message": "Cancel all"
-  },
-  "confirmCancelAll": {
-    "message": "Sure? Click again"
-  },
-  "activeCount": {
-    "message": "$COUNT$ active",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "speedNow": {
-    "message": "Now"
   },
   "speedAvg": {
     "message": "avg $SPEED$",
@@ -133,5 +107,109 @@
         "content": "$1"
       }
     }
+  },
+  "addDownload": {
+    "message": "New download"
+  },
+  "resumeSelected": {
+    "message": "Resume (selected, or all if none)"
+  },
+  "pauseSelected": {
+    "message": "Pause (selected, or all if none)"
+  },
+  "removeSelected": {
+    "message": "Remove selected from the list (files stay on disk)"
+  },
+  "confirmRemove": {
+    "message": "Click again to remove"
+  },
+  "openFolder": {
+    "message": "Show in folder"
+  },
+  "search": {
+    "message": "Search"
+  },
+  "limitSettings": {
+    "message": "Speed limit settings"
+  },
+  "urlPlaceholder": {
+    "message": "Paste a download link (https://…)"
+  },
+  "download": {
+    "message": "Download"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "invalidUrl": {
+    "message": "Enter a link starting with http:// or https://"
+  },
+  "tabAll": {
+    "message": "All"
+  },
+  "tabActive": {
+    "message": "Active"
+  },
+  "tabCompleted": {
+    "message": "Completed"
+  },
+  "tabImage": {
+    "message": "Images"
+  },
+  "tabVideo": {
+    "message": "Video"
+  },
+  "tabAudio": {
+    "message": "Music"
+  },
+  "tabDocument": {
+    "message": "Documents"
+  },
+  "tabArchive": {
+    "message": "Archives"
+  },
+  "colName": {
+    "message": "Name"
+  },
+  "colSize": {
+    "message": "Size"
+  },
+  "selectAll": {
+    "message": "Select all"
+  },
+  "select": {
+    "message": "Select"
+  },
+  "statusFailed": {
+    "message": "Failed"
+  },
+  "statusCanceled": {
+    "message": "Canceled"
+  },
+  "statusMissing": {
+    "message": "File deleted"
+  },
+  "retry": {
+    "message": "Retry"
+  },
+  "limitValue": {
+    "message": "Limit"
+  },
+  "noLimit": {
+    "message": "No limit"
+  },
+  "snailOnHint": {
+    "message": "Speed limit on ($LIMIT$). Click to turn off.",
+    "placeholders": {
+      "limit": {
+        "content": "$1"
+      }
+    }
+  },
+  "snailOffHint": {
+    "message": "Speed limit off. Click to turn on."
+  },
+  "speedNowHint": {
+    "message": "Total download speed right now (avg = last 20 seconds)"
   }
 }

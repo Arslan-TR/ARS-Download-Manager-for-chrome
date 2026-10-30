@@ -3,7 +3,7 @@
   "name": "__MSG_extName__",
   "short_name": "ARS DM",
   "description": "__MSG_extDescription__",
-  "version": "0.26.2",
+  "version": "0.27.0",
   "default_locale": "en",
   "minimum_chrome_version": "116",
   "permissions": ["downloads", "storage", "alarms"],

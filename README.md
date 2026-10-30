@@ -12,15 +12,17 @@ Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish a
 
 ## Features
 
-- **Live list of active downloads** — name, size, downloaded amount, progress bar, speed, time left, URL.
-- **Global speed limit** in KB/s, MB/s or Mbps, with 1/2/5/10 MB/s presets and an on/off switch.
+- **Download manager window** — toolbar (new download from a link, resume, pause, remove from list, show in folder), search, and tabs: All, Active, Completed, Images, Video, Music, Documents, Archives.
+- **Full download list**, newest first — active, paused, finished, failed and canceled — with checkboxes for bulk actions, file-type labels, progress bars, size, speed and time left. Click a name for the link and a per-file limit; double-click a finished file to show it in its folder; retry failed or canceled ones.
+- **Status bar** — a 🐌 button turns the speed limit on/off and shows it; the green box shows the total download speed right now and its 20 s average.
+- **Global speed limit** in KB/s, MB/s or Mbps, with 1/2/5/10 MB/s presets (settings panel behind the ˄ button).
 - **Two distribution modes**
   - **Share** — the limit is split evenly; a download whose server is slower than its share gives the unused part to the others.
   - **One by one** — the oldest download gets the bandwidth; the rest crawl in **snail mode** instead of stopping, so their connections stay alive. When the first one finishes, the next takes over.
 - **Per-file limit** on any download, with or without the global limit.
-- **Pause all / Resume all / Cancel all** (cancel asks for a second click), plus per-download pause/resume/cancel.
 - Downloads you pause yourself stay paused — the limiter never resumes them.
-- Toolbar badge shows the active limit (e.g. `2M`).
+- "Remove" only clears list entries (asks for a second click); files on disk are never deleted.
+- Toolbar badge shows the active limit (e.g. `2M`). Light and dark theme.
 
 ## Install (developer mode)
 
@@ -73,7 +75,7 @@ The e2e run needs Playwright with Chromium available; it checks the limit, share
 Bump `version` in `manifest.json` (and `package.json`), commit, then push a matching tag:
 
 ```sh
-git tag v0.26.2 && git push origin v0.26.2   # or: Actions → Release → Run workflow
+git tag v0.27.0 && git push origin v0.27.0   # or: Actions → Release → Run workflow
 ```
 
 `.github/workflows/release.yml` checks the tag matches the manifest, runs the unit tests, builds the zip and publishes the GitHub release.
@@ -85,6 +87,7 @@ manifest.json        MV3 manifest (downloads, storage, alarms)
 background.js        service worker: tick loop, applies decisions, messages, badge
 lib/throttle.js      pure throttling engine (token buckets, allocation, modes)
 lib/units.js         unit conversion and formatting
+lib/categories.js    file-type categories, list statuses and tabs
 lib/state.js         settings (storage.local) and our-paused set (storage.session)
 popup.html/css/js    toolbar popup
 _locales/{en,tr}     UI strings
