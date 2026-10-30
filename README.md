@@ -73,7 +73,7 @@ The e2e run needs Playwright with Chromium available; it checks the limit, share
 Bump `version` in `manifest.json` (and `package.json`), commit, then push a matching tag:
 
 ```sh
-git tag v0.26.1 && git push origin v0.26.1   # or: Actions → Release → Run workflow
+git tag v0.26.2 && git push origin v0.26.2   # or: Actions → Release → Run workflow
 ```
 
 `.github/workflows/release.yml` checks the tag matches the manifest, runs the unit tests, builds the zip and publishes the GitHub release.
