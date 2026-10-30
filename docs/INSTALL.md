@@ -1,6 +1,6 @@
 # ARS Download Manager — Installation Guide
 
-*Türkçe: [KURULUM.md](KURULUM.md)*
+*🇹🇷 Türkçe: [KURULUM.md](KURULUM.md)*
 
 This guide is written for people with **no computer experience at all**. Follow the steps in order and don't skip any.
 Total time: **about 5 minutes.**
@@ -21,11 +21,12 @@ Total time: **about 5 minutes.**
 
 ### Step 1: Download the extension
 
-1. Open this page: **https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome**
-2. Find the **green `Code`** button on the page and click it.
-3. In the small window that opens, click **`Download ZIP`** at the bottom.
+1. Open this page: **https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/releases/latest**
+2. Further down the page, find the **`Assets`** heading.
+3. Click **`ARS-Download-Manager-v.….zip`** under it (for example `ARS-Download-Manager-v.0.26.1.zip`).
+   *(**Don't click** the "Source code" files next to it; those are for developers.)*
 
-✅ **What happens?** A file is saved to your computer. Its name starts with `ARS-Download-Manager-for-chrome` and ends with `.zip`.
+✅ **What happens?** A file starting with `ARS-Download-Manager-v.` and ending with `.zip` is saved to your computer.
 It usually goes into your **Downloads** folder.
 
 ---
@@ -60,7 +61,7 @@ The downloaded file is a compressed package. We need to open it first.
 - a folder called `icons`
 - a file called `popup.html`
 
-❗ If you **don't** see these, and there is **another folder** with the same name inside: that inner folder is the real one. Use the **inner folder** in the next steps.
+❗ If you don't see these, you may have downloaded the wrong file in Step 1 (it must be the file starting with `ARS-Download-Manager-v.`, not "Source code").
 
 ---
 
@@ -224,7 +225,7 @@ The speed shown in the window is the **average over the last 20 seconds**, and i
 
 ### Updating to a new version
 
-1. Do **Steps 1 and 2** of Part 1 again (download and unzip the new ZIP).
+1. Do **Steps 1 and 2** of Part 1 again (download the new version's ZIP from the same page and unzip it).
 2. **Delete everything inside** the old folder, then copy everything from the new folder into it.
 3. Open the `chrome://extensions` page.
 4. Click the **circular arrow (↻)** button on the ARS Download Manager card.

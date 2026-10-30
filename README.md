@@ -4,7 +4,9 @@ Chrome (Manifest V3) extension that **limits the speed of downloads that are alr
 
 Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish and English UI, picked from the browser language.
 
-> 📘 **Step-by-step install & usage guide: [English](docs/INSTALL.md) · [Türkçe](docs/KURULUM.md)**
+> 📥 **Download: [latest release](https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/releases/latest)** (`ARS-Download-Manager-v.….zip` under Assets)
+>
+> 📘 **Step-by-step install & usage guide: [English](docs/INSTALL.md) · 🇹🇷 [Türkçe](docs/KURULUM.md)**
 
 ![popup](docs/popup-en.png)
 
@@ -22,9 +24,9 @@ Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish a
 
 ## Install (developer mode)
 
-Beginner-friendly step-by-step guide: [English](docs/INSTALL.md) · [Türkçe](docs/KURULUM.md).
+Beginner-friendly step-by-step guide: [English](docs/INSTALL.md) · 🇹🇷 [Türkçe](docs/KURULUM.md).
 
-1. Clone or download this repository (**Code → Download ZIP**, then unzip to a folder you keep).
+1. Download `ARS-Download-Manager-v.<version>.zip` from the [latest release](https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/releases/latest) and unzip it to a folder you keep (or clone this repository).
 2. Open `chrome://extensions`, turn on **Developer mode**.
 3. **Load unpacked** → select the repository folder.
 
@@ -61,9 +63,20 @@ npm test            # unit tests (node:test) incl. a simulator modelled on Chrom
 npm run test:e2e    # loads the extension in Chromium via Playwright, downloads from a paced local server
 E2E_LANG=tr E2E_SHOTS=./out npm run test:e2e   # Turkish UI, save popup screenshots
 node scripts/make-icons.mjs                    # re-render icons/icon*.png from icons/icon.svg
+scripts/build-zip.sh                           # build dist/ARS-Download-Manager-v.<version>.zip
 ```
 
 The e2e run needs Playwright with Chromium available; it checks the limit, share/one-by-one modes, user pauses, releasing the limit, file integrity (SHA-256) and that no download reconnected.
+
+### Releasing
+
+Bump `version` in `manifest.json` (and `package.json`), commit, then push a matching tag:
+
+```sh
+git tag v0.26.1 && git push origin v0.26.1
+```
+
+`.github/workflows/release.yml` checks the tag matches the manifest, runs the unit tests, builds the zip and publishes the GitHub release.
 
 ## Layout
 

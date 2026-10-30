@@ -1,6 +1,6 @@
 # ARS Download Manager — Kurulum Rehberi
 
-*English: [INSTALL.md](INSTALL.md)*
+*English: [INSTALL.md](INSTALL.md) · 🇹🇷 Türkçe (bu sayfa)*
 
 Bu rehber **hiç bilgisayar bilgisi olmayanlar** için yazıldı. Adımları sırayla yapın, hiçbirini atlamayın.
 Toplam süre: **yaklaşık 5 dakika.**
@@ -21,11 +21,12 @@ Toplam süre: **yaklaşık 5 dakika.**
 
 ### Adım 1: Eklentiyi indirin
 
-1. Şu sayfayı açın: **https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome**
-2. Sayfada **yeşil renkli `Code`** düğmesini bulun ve tıklayın.
-3. Açılan küçük pencerede en alttaki **`Download ZIP`** yazısına tıklayın.
+1. Şu sayfayı açın: **https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/releases/latest**
+2. Sayfanın aşağısında **`Assets`** başlığını bulun.
+3. Altındaki **`ARS-Download-Manager-v.….zip`** yazısına tıklayın (örneğin `ARS-Download-Manager-v.0.26.1.zip`).
+   *(Yanındaki "Source code" dosyalarına **tıklamayın**, onlar geliştiriciler için.)*
 
-✅ **Ne olur?** Bilgisayarınıza bir dosya iner. Adı `ARS-Download-Manager-for-chrome` ile başlar ve sonu `.zip` ile biter.
+✅ **Ne olur?** Bilgisayarınıza `ARS-Download-Manager-v.` ile başlayan, sonu `.zip` ile biten bir dosya iner.
 Bu dosya genelde **İndirilenler** klasörüne iner.
 
 ---
@@ -60,7 +61,7 @@ Bu dosya genelde **İndirilenler** klasörüne iner.
 - `icons` adında bir klasör
 - `popup.html` adında bir dosya
 
-❗ Bunları **göremiyorsanız** ve içeride aynı isimde **bir klasör daha** varsa: O iç klasör asıl klasördür. Sonraki adımlarda **iç klasörü** kullanın.
+❗ Bunları göremiyorsanız Adım 1'de yanlış dosyayı indirmiş olabilirsiniz ("Source code" değil, `ARS-Download-Manager-v.` ile başlayan dosya olmalı).
 
 ---
 
@@ -226,7 +227,7 @@ Uyarıyı **kapatın** (✕). **"Devre dışı bırak" gibi bir düğmeye basmay
 
 ### Yeni sürüme güncellemek
 
-1. Bölüm 1, **Adım 1 ve 2**'yi tekrar yapın (yeni ZIP'i indirip açın).
+1. Bölüm 1, **Adım 1 ve 2**'yi tekrar yapın (aynı sayfadan yeni sürümün ZIP'ini indirip açın).
 2. Eski klasörün **içindeki her şeyi silin**, yeni klasörün içindekileri oraya kopyalayın.
 3. `chrome://extensions` sayfasını açın.
 4. ARS Download Manager kartındaki **yuvarlak ok (↻)** düğmesine basın.
