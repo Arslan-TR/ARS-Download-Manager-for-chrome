@@ -4,6 +4,8 @@ Chrome (Manifest V3) extension that **limits the speed of downloads that are alr
 
 Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish and English UI, picked from the browser language.
 
+> 📘 **Türkçe adım adım kurulum ve kullanım rehberi: [docs/KURULUM.md](docs/KURULUM.md)**
+
 ![popup](docs/popup-en.png)
 
 ## Features
@@ -20,7 +22,9 @@ Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish a
 
 ## Install (developer mode)
 
-1. Clone or download this repository.
+Step-by-step guide in Turkish: [docs/KURULUM.md](docs/KURULUM.md).
+
+1. Clone or download this repository (**Code → Download ZIP**, then unzip to a folder you keep).
 2. Open `chrome://extensions`, turn on **Developer mode**.
 3. **Load unpacked** → select the repository folder.
 
