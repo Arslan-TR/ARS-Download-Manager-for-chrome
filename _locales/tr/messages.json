@@ -11,9 +11,6 @@
   "toggleLabel": {
     "message": "Hız sınırını aç veya kapat"
   },
-  "modeLabel": {
-    "message": "Dağıtım"
-  },
   "modeShare": {
     "message": "Paylaştır"
   },
@@ -129,9 +126,6 @@
   "search": {
     "message": "Ara"
   },
-  "limitSettings": {
-    "message": "Hız sınırı ayarları"
-  },
   "urlPlaceholder": {
     "message": "İndirme linkini yapıştırın (https://…)"
   },
@@ -211,5 +205,68 @@
   },
   "speedNowHint": {
     "message": "Şu anki toplam indirme hızı (ort. = son 20 saniye)"
+  },
+  "newShort": {
+    "message": "Yeni"
+  },
+  "searchPlaceholder": {
+    "message": "Ara…"
+  },
+  "viewList": {
+    "message": "Liste görünümü"
+  },
+  "viewGrid": {
+    "message": "Izgara görünümü"
+  },
+  "moreFilters": {
+    "message": "Diğer filtreler"
+  },
+  "tabProgram": {
+    "message": "Programlar"
+  },
+  "tabOther": {
+    "message": "Diğer"
+  },
+  "tabFailed": {
+    "message": "Başarısız / iptal"
+  },
+  "sortName": {
+    "message": "Ada göre sırala"
+  },
+  "sortSize": {
+    "message": "Boyuta göre sırala"
+  },
+  "openFile": {
+    "message": "Dosyayı aç"
+  },
+  "moreActions": {
+    "message": "Diğer işlemler"
+  },
+  "copyLink": {
+    "message": "Linki kopyala"
+  },
+  "copied": {
+    "message": "Link kopyalandı"
+  },
+  "redownload": {
+    "message": "Yeniden indir"
+  },
+  "removeFromList": {
+    "message": "Listeden kaldır"
+  },
+  "cancelDownload": {
+    "message": "İndirmeyi iptal et"
+  },
+  "fileLimitMenu": {
+    "message": "Dosya sınırı…"
+  },
+  "limitColon": {
+    "message": "Sınır:"
+  },
+  "modeColon": {
+    "message": "Dağıtım:"
+  },
+  "openFailed": {
+    "message": "Dosya açılamadı"
   }
 }

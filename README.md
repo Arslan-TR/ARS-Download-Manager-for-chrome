@@ -12,17 +12,18 @@ Arayüz Türkçe ve İngilizce'dir (tarayıcı diline göre otomatik). Turkish a
 
 ## Features
 
-- **Download manager window** — toolbar (new download from a link, resume, pause, remove from list, show in folder), search, and tabs: All, Active, Completed, Images, Video, Music, Documents, Archives.
-- **Full download list**, newest first — active, paused, finished, failed and canceled — with checkboxes for bulk actions, file-type labels, progress bars, size, speed and time left. Click a name for the link and a per-file limit; double-click a finished file to show it in its folder; retry failed or canceled ones.
-- **Status bar** — a 🐌 button turns the speed limit on/off and shows it; the green box shows the total download speed right now and its 20 s average.
-- **Global speed limit** in KB/s, MB/s or Mbps, with 1/2/5/10 MB/s presets (settings panel behind the ˄ button).
+- **Download manager window** — toolbar (+ New download from a link, resume, pause, remove from list, show in folder), search, **list or grid view**.
+- **Tabs** — All, Active, Completed, Images, Video, Music, Documents — plus a **filter menu** for Archives, Programs, Other and Failed / canceled. **Sort** by name or size.
+- **Full download list**, newest first — active, paused, finished, failed and canceled — with status icons, file-type labels, progress bars, size, speed and time left. Each row has ▶ (open a finished file / pause / resume / retry), 📁 show in folder and a ⋯ menu (file limit, copy link, download again, cancel, remove from list). Click a row to select it; double-click a finished file to open it.
+- **Speed-limit bar** always visible: on/off switch, limit value with unit, 1/2/5/10 MB/s presets, Share / One by one.
+- **Status bar** — a 🐌 button toggles the limit and shows it; the green box shows the total download speed right now and its 20 s average.
 - **Two distribution modes**
   - **Share** — the limit is split evenly; a download whose server is slower than its share gives the unused part to the others.
   - **One by one** — the oldest download gets the bandwidth; the rest crawl in **snail mode** instead of stopping, so their connections stay alive. When the first one finishes, the next takes over.
 - **Per-file limit** on any download, with or without the global limit.
 - Downloads you pause yourself stay paused — the limiter never resumes them.
-- "Remove" only clears list entries (asks for a second click); files on disk are never deleted.
-- Toolbar badge shows the active limit (e.g. `2M`). Light and dark theme.
+- "Remove" only clears list entries; files on disk are never deleted.
+- Toolbar badge shows the active limit (e.g. `2M`). Light and dark theme; English and Turkish.
 
 ## Install (developer mode)
 
@@ -80,7 +81,7 @@ The e2e run needs Playwright with Chromium available; it checks the limit, share
 Bump `version` in `manifest.json` (and `package.json`), commit, then push a matching tag:
 
 ```sh
-git tag v0.27.0 && git push origin v0.27.0   # or: Actions → Release → Run workflow
+git tag v0.28.0 && git push origin v0.28.0   # or: Actions → Release → Run workflow
 ```
 
 `.github/workflows/release.yml` checks the tag matches the manifest, runs the unit tests, builds the zip and publishes the GitHub release.
@@ -88,7 +89,7 @@ git tag v0.27.0 && git push origin v0.27.0   # or: Actions → Release → Run w
 ## Layout
 
 ```
-manifest.json        MV3 manifest (downloads, storage, alarms)
+manifest.json        MV3 manifest (downloads, downloads.open, storage, alarms)
 background.js        service worker: tick loop, applies decisions, messages, badge
 lib/throttle.js      pure throttling engine (token buckets, allocation, modes)
 lib/units.js         unit conversion and formatting

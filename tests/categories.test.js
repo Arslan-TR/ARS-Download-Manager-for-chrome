@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { categoryOf, statusOf, matchesTab, extensionOf, TABS } from '../lib/categories.js';
+import { categoryOf, statusOf, matchesTab, extensionOf, sortDownloads, TABS, MORE_FILTERS } from '../lib/categories.js';
 
 test('extensionOf reads the last extension of the file name', () => {
   assert.equal(extensionOf('C:\\Users\\a\\Downloads\\Adele - Hello.MP4'), 'mp4');
@@ -39,5 +39,29 @@ test('matchesTab filters by status and category', () => {
   assert.ok(matchesTab(active, 'active'));
   assert.ok(matchesTab(active, 'archive'));
   assert.ok(!matchesTab(active, 'completed'));
-  assert.deepEqual(TABS, ['all', 'active', 'completed', 'image', 'video', 'audio', 'document', 'archive']);
+  assert.deepEqual(TABS, ['all', 'active', 'completed', 'image', 'video', 'audio', 'document']);
+});
+
+test('extra filters cover programs, other files and failed downloads', () => {
+  assert.deepEqual(MORE_FILTERS, ['archive', 'program', 'other', 'failed']);
+  assert.ok(matchesTab({ state: 'complete', exists: true, filename: 'setup.exe' }, 'program'));
+  assert.ok(matchesTab({ state: 'complete', exists: true, filename: 'README' }, 'other'));
+  assert.ok(matchesTab({ state: 'interrupted', error: 'USER_CANCELED', filename: 'a.zip' }, 'failed'));
+  assert.ok(matchesTab({ state: 'interrupted', error: 'NETWORK_FAILED', filename: 'a.zip' }, 'failed'));
+  assert.ok(!matchesTab({ state: 'complete', exists: true, filename: 'a.zip' }, 'failed'));
+});
+
+test('sortDownloads orders by name or size, both directions, keeping input order otherwise', () => {
+  const list = [
+    { id: 1, filename: '/d/beta.zip', fileSize: 30, totalBytes: 30 },
+    { id: 2, filename: '/d/Alpha.mp4', fileSize: 10, totalBytes: 10 },
+    { id: 3, filename: '/d/gamma.pdf', fileSize: 0, totalBytes: 20 },
+  ];
+  const ids = (l) => l.map((d) => d.id);
+  assert.deepEqual(ids(sortDownloads(list, 'name', 'asc')), [2, 1, 3]);
+  assert.deepEqual(ids(sortDownloads(list, 'name', 'desc')), [3, 1, 2]);
+  assert.deepEqual(ids(sortDownloads(list, 'size', 'asc')), [2, 3, 1]);
+  assert.deepEqual(ids(sortDownloads(list, 'size', 'desc')), [1, 3, 2]);
+  assert.deepEqual(ids(sortDownloads(list, null, 'asc')), [1, 2, 3]);
+  assert.deepEqual(ids(list), [1, 2, 3], 'input is not mutated');
 });

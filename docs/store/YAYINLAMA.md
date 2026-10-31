@@ -113,6 +113,11 @@ Limits the download speed of Chrome downloads without cancelling them, and lets 
 Needed to read the list and progress of Chrome downloads and to pause and resume them in short cycles to enforce the user's speed limit. Also used for the user's own actions in the popup: start a download from a pasted link, pause/resume/retry, show a file in its folder, and remove entries from the download list.
 ```
 
+`downloads.open`
+```
+Lets the user open a finished download from the popup (the ▶ button on a completed file, or a double-click on it). Chrome only allows this in direct response to the user's click.
+```
+
 `storage`
 ```
 Saves the user's settings (speed limit, unit, distribution mode, per-file limits) and the list of downloads the extension paused itself, so it never resumes downloads the user paused.

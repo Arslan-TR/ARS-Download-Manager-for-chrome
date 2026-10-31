@@ -1,5 +1,5 @@
 import { toBps, fromBps, formatBytes, formatSpeed, formatEta, badgeText } from './lib/units.js';
-import { TABS, categoryOf, statusOf, matchesTab, extensionOf } from './lib/categories.js';
+import { TABS, MORE_FILTERS, categoryOf, statusOf, matchesTab, extensionOf, sortDownloads } from './lib/categories.js';
 
 const REFRESH_MS = 1000;
 const UNIT_LABELS = { KBps: 'KB/s', MBps: 'MB/s', Mbps: 'Mbps' };
@@ -19,16 +19,19 @@ const TAB_KEYS = {
   audio: 'tabAudio',
   document: 'tabDocument',
   archive: 'tabArchive',
+  program: 'tabProgram',
+  other: 'tabOther',
+  failed: 'tabFailed',
 };
 const STATUS_KEYS = { failed: 'statusFailed', canceled: 'statusCanceled', missing: 'statusMissing' };
-// What a row's action button does, per status.
+// What a row's main button does, per status.
 const ROW_ACTION = {
   active: { icon: 'pause', op: 'pause', title: 'pause' },
   paused: { icon: 'play', op: 'resume', title: 'resume' },
   failed: { icon: 'retry', op: 'retry', title: 'retry' },
   canceled: { icon: 'retry', op: 'retry', title: 'retry' },
-  complete: { icon: 'folder', op: 'show', title: 'openFolder' },
-  missing: { icon: 'folder', op: null, title: 'statusMissing' },
+  complete: { icon: 'play', op: 'open', title: 'openFile' },
+  missing: { icon: 'play', op: null, title: 'statusMissing' },
 };
 
 const t = (key, subs) => chrome.i18n.getMessage(key, subs) || key;
@@ -42,17 +45,20 @@ const els = {
   removeBtn: $('removeBtn'),
   folderBtn: $('folderBtn'),
   search: $('search'),
-  menuBtn: $('menuBtn'),
   addForm: $('addForm'),
   addUrl: $('addUrl'),
   addClose: $('addClose'),
   addError: $('addError'),
   tabs: $('tabs'),
+  filterBtn: $('filterBtn'),
+  filterLabel: $('filterLabel'),
+  filterMenu: $('filterMenu'),
   selectAll: $('selectAll'),
   list: $('list'),
+  listWrap: document.querySelector('.list-wrap'),
   empty: $('empty'),
   tpl: $('itemTpl'),
-  settings: $('settings'),
+  limitbar: $('limitbar'),
   enabled: $('enabled'),
   limit: $('limit'),
   unit: $('unit'),
@@ -61,7 +67,8 @@ const els = {
   snailLabel: $('snailLabel'),
   speedNow: $('speedNow'),
   speedAvg: $('speedAvg'),
-  settingsBtn: $('settingsBtn'),
+  toast: $('toast'),
+  rowMenu: $('rowMenu'),
 };
 const ETA_FMT = {
   h: (h, m) => t('etaHours', [String(h), String(m)]),
@@ -71,12 +78,32 @@ const ETA_FMT = {
 
 const rows = new Map(); // download id -> <li>
 const tabButtons = new Map(); // tab -> <button>
+const filterItems = new Map(); // extra filter -> menu <button>
 const selected = new Set();
 const expanded = new Set();
 let state = null;
 let tab = 'all';
 let query = '';
 let visible = []; // downloads currently shown
+let menuFor = null; // download id the row menu is open for
+
+// View and sort order are per-viewer conveniences; storage may be unavailable.
+function loadPref(key, fallback) {
+  try {
+    return JSON.parse(localStorage.getItem(`ars.${key}`)) ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+function savePref(key, value) {
+  try {
+    localStorage.setItem(`ars.${key}`, JSON.stringify(value));
+  } catch {
+    // Not saved; the popup still works.
+  }
+}
+let view = loadPref('view', 'list');
+let sort = loadPref('sort', { key: null, dir: 'asc' });
 
 function localize() {
   document.documentElement.lang = chrome.i18n.getUILanguage();
@@ -98,7 +125,25 @@ function hostOf(url) {
   }
 }
 
-// ---------- Tabs ----------
+let toastTimer = null;
+function toast(text) {
+  clearTimeout(toastTimer);
+  els.toast.textContent = text;
+  els.toast.hidden = false;
+  toastTimer = setTimeout(() => (els.toast.hidden = true), 2000);
+}
+
+function findDownload(id) {
+  return state?.downloads.find((d) => d.id === id);
+}
+
+// ---------- Tabs and filter menu ----------
+
+function setTab(key) {
+  tab = key;
+  closeMenus();
+  render(state);
+}
 
 function buildTabs() {
   for (const key of TABS) {
@@ -107,12 +152,20 @@ function buildTabs() {
     b.className = 'tab';
     b.setAttribute('role', 'tab');
     b.addEventListener('click', () => {
-      tab = key;
       b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-      render(state);
+      setTab(key);
     });
     els.tabs.append(b);
     tabButtons.set(key, b);
+  }
+  for (const key of MORE_FILTERS) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'menuitemradio');
+    b.innerHTML = '<span class="label-text"></span><span class="count"></span>';
+    b.addEventListener('click', () => setTab(key));
+    els.filterMenu.append(b);
+    filterItems.set(key, b);
   }
 }
 
@@ -123,15 +176,79 @@ function updateTabFades() {
 }
 
 function renderTabs(downloads) {
+  const count = (key) => downloads.filter((d) => matchesTab(d, key)).length;
   for (const [key, b] of tabButtons) {
-    const n = downloads.filter((d) => matchesTab(d, key)).length;
-    b.textContent = `${t(TAB_KEYS[key])} (${n})`;
+    b.textContent = `${t(TAB_KEYS[key])} (${count(key)})`;
     b.setAttribute('aria-selected', String(key === tab));
   }
+  for (const [key, b] of filterItems) {
+    b.querySelector('.label-text').textContent = t(TAB_KEYS[key]);
+    b.querySelector('.count').textContent = count(key);
+    b.setAttribute('aria-checked', String(key === tab));
+  }
+  // The filter button shows the extra filter in use, if any.
+  const extra = MORE_FILTERS.includes(tab);
+  els.filterBtn.setAttribute('aria-selected', String(extra));
+  els.filterLabel.textContent = extra ? `${t(TAB_KEYS[tab])} (${count(tab)})` : '';
   updateTabFades();
 }
 
+// ---------- Menus ----------
+
+function closeMenus() {
+  els.filterMenu.hidden = true;
+  els.filterBtn.setAttribute('aria-expanded', 'false');
+  els.rowMenu.hidden = true;
+  menuFor = null;
+}
+
+function openRowMenu(id, anchor) {
+  const d = findDownload(id);
+  if (!d) return;
+  const status = statusOf(d);
+  const inProgress = status === 'active' || status === 'paused';
+  const show = { limit: inProgress, copy: true, redownload: !inProgress, cancel: inProgress, remove: true };
+  for (const b of els.rowMenu.querySelectorAll('[data-action]')) b.hidden = !show[b.dataset.action];
+
+  closeMenus();
+  menuFor = id;
+  els.rowMenu.hidden = false;
+  // Place under the button, flipping up or left when it would run off the popup.
+  const r = anchor.getBoundingClientRect();
+  const m = els.rowMenu.getBoundingClientRect();
+  const top = r.bottom + 4 + m.height > window.innerHeight ? r.top - m.height - 4 : r.bottom + 4;
+  els.rowMenu.style.top = `${Math.max(4, top)}px`;
+  els.rowMenu.style.left = `${Math.max(4, Math.min(r.right - m.width, window.innerWidth - m.width - 4))}px`;
+  els.rowMenu.querySelector('button:not([hidden])')?.focus();
+}
+
+function rowMenuAction(action) {
+  const id = menuFor;
+  const d = findDownload(id);
+  closeMenus();
+  if (!d) return;
+  if (action === 'limit') {
+    expanded.add(id);
+    render(state);
+    rows.get(id)?.querySelector('.perfile-input')?.focus();
+  } else if (action === 'copy') {
+    navigator.clipboard.writeText(d.url).then(() => toast(t('copied')), () => toast(d.url));
+  } else if (action === 'redownload') {
+    send({ type: 'control', op: 'retry', ids: [id] }).then(render);
+  } else if (action === 'cancel') {
+    send({ type: 'control', op: 'cancel', ids: [id] }).then(render);
+  } else if (action === 'remove') {
+    selected.delete(id);
+    send({ type: 'control', op: 'erase', ids: [id] }).then(render);
+  }
+}
+
 // ---------- Rows ----------
+
+function openFile(id) {
+  // Called straight from the click so Chrome sees the user gesture it requires.
+  chrome.downloads.open(id).catch(() => toast(t('openFailed')));
+}
 
 function createRow(id) {
   const li = els.tpl.content.firstElementChild.cloneNode(true);
@@ -145,23 +262,29 @@ function createRow(id) {
     renderSelection();
   });
 
-  li.querySelector('.act').addEventListener('click', (e) => {
+  li.querySelector('.primary-act').addEventListener('click', (e) => {
     const op = e.currentTarget.dataset.op;
-    if (op === 'show') send({ type: 'show', id });
+    if (op === 'open') openFile(id);
     else if (op) send({ type: 'control', op, ids: [id] }).then(render);
   });
-
-  // Clicking the row (not its controls) shows the link and the per-file limit.
-  li.querySelector('.row-main').addEventListener('click', (e) => {
-    if (e.target.closest('input, button')) return;
-    if (expanded.has(id)) expanded.delete(id);
-    else expanded.add(id);
-    li.querySelector('.details').hidden = !expanded.has(id);
+  li.querySelector('.folder-act').addEventListener('click', () => send({ type: 'show', id }));
+  li.querySelector('.more-act').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (menuFor === id) closeMenus();
+    else openRowMenu(id, e.currentTarget);
   });
-  li.querySelector('.row-main').addEventListener('dblclick', (e) => {
+
+  // Clicking a row selects it; double-clicking a finished file opens it.
+  const main = li.querySelector('.row-main');
+  main.addEventListener('click', (e) => {
     if (e.target.closest('input, button')) return;
-    const d = state?.downloads.find((x) => x.id === id);
-    if (d && statusOf(d) === 'complete') send({ type: 'show', id });
+    sel.checked = !sel.checked;
+    sel.dispatchEvent(new Event('change'));
+  });
+  main.addEventListener('dblclick', (e) => {
+    if (e.target.closest('input, button')) return;
+    const d = findDownload(id);
+    if (d && statusOf(d) === 'complete') openFile(id);
   });
 
   li.querySelector('.perfile-label').textContent = t('perFileLabel');
@@ -199,12 +322,20 @@ function updateRow(li, d, unit) {
   ftype.textContent = extensionOf(d.filename).slice(0, 4) || '•';
 
   const action = ROW_ACTION[status];
-  const act = li.querySelector('.act');
+  const act = li.querySelector('.primary-act');
   act.dataset.icon = action.icon;
   act.dataset.op = action.op ?? '';
   act.disabled = !action.op;
   act.title = t(action.title);
   act.setAttribute('aria-label', act.title);
+
+  const folder = li.querySelector('.folder-act');
+  folder.disabled = status !== 'complete';
+  folder.title = t('openFolder');
+  folder.setAttribute('aria-label', folder.title);
+  const more = li.querySelector('.more-act');
+  more.title = t('moreActions');
+  more.setAttribute('aria-label', more.title);
 
   // Second line: limiter role, speed and time left while downloading;
   // otherwise the site it came from.
@@ -248,15 +379,13 @@ function updateRow(li, d, unit) {
   const url = li.querySelector('.url');
   url.textContent = d.url;
   url.title = d.url;
-  const perfile = li.querySelector('.perfile');
-  perfile.hidden = !inProgress;
   const input = li.querySelector('.perfile-input');
   if (document.activeElement !== input) input.value = d.perFileBps ? fromBps(d.perFileBps, unit) : '';
   li.querySelector('.perfile-unit').textContent = UNIT_LABELS[unit];
-  li.querySelector('.details').hidden = !expanded.has(d.id);
+  li.querySelector('.details').hidden = !(expanded.has(d.id) && inProgress);
 }
 
-// ---------- Selection & toolbar ----------
+// ---------- Selection, toolbar, sort, view ----------
 
 function selectedDownloads() {
   return (state?.downloads ?? []).filter((d) => selected.has(d.id));
@@ -304,11 +433,20 @@ function resetRemove() {
   els.removeBtn.title = t('removeSelected');
 }
 
+function renderSortAndView() {
+  for (const b of document.querySelectorAll('.sort')) {
+    if (b.dataset.sort === sort.key) b.dataset.dir = sort.dir;
+    else delete b.dataset.dir;
+  }
+  for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-pressed', String(b.dataset.view === view));
+  els.list.classList.toggle('grid', view === 'grid');
+}
+
 // ---------- Settings ----------
 
 function renderSettings(s) {
   els.enabled.checked = s.enabled;
-  els.settings.classList.toggle('off', !s.enabled);
+  els.limitbar.classList.toggle('off', !s.enabled);
   if (document.activeElement !== els.limit) els.limit.value = fromBps(s.limitBps, s.unit);
   els.unit.value = s.unit;
   for (const b of document.querySelectorAll('[data-mode]')) {
@@ -321,11 +459,6 @@ function renderSettings(s) {
   els.snail.setAttribute('aria-pressed', String(on));
   els.snailLabel.textContent = on ? `${fromBps(s.limitBps, s.unit)} ${UNIT_LABELS[s.unit]}` : t('noLimit');
   els.snail.title = t(on ? 'snailOnHint' : 'snailOffHint', [badgeText(s.limitBps)]);
-}
-
-function toggleSettings(open = els.settings.hidden) {
-  els.settings.hidden = !open;
-  for (const b of [els.menuBtn, els.settingsBtn]) b.setAttribute('aria-expanded', String(open));
 }
 
 let errorTimer = null;
@@ -354,15 +487,18 @@ function render(next) {
   const { settings, downloads, totalSpeed, totalInstant } = next;
   renderSettings(settings);
   renderTabs(downloads);
+  renderSortAndView();
 
   // Forget selections of downloads that are gone.
   const ids = new Set(downloads.map((d) => d.id));
   for (const id of selected) if (!ids.has(id)) selected.delete(id);
+  if (menuFor != null && !ids.has(menuFor)) closeMenus();
 
   const q = query.trim().toLowerCase();
-  visible = downloads.filter(
+  const filtered = downloads.filter(
     (d) => matchesTab(d, tab) && (!q || basename(d.filename).toLowerCase().includes(q) || d.url.toLowerCase().includes(q)),
   );
+  visible = sortDownloads(filtered, sort.key, sort.dir);
 
   const seen = new Set();
   visible.forEach((d, i) => {
@@ -441,6 +577,42 @@ els.folderBtn.addEventListener('click', () => {
   send({ type: 'show', id: one });
 });
 
+for (const b of document.querySelectorAll('[data-view]')) {
+  b.addEventListener('click', () => {
+    view = b.dataset.view;
+    savePref('view', view);
+    render(state);
+  });
+}
+for (const b of document.querySelectorAll('.sort')) {
+  // Ascending, then descending, then back to newest first.
+  b.addEventListener('click', () => {
+    const key = b.dataset.sort;
+    if (sort.key !== key) sort = { key, dir: 'asc' };
+    else if (sort.dir === 'asc') sort = { key, dir: 'desc' };
+    else sort = { key: null, dir: 'asc' };
+    savePref('sort', sort);
+    render(state);
+  });
+}
+
+els.filterBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const open = els.filterMenu.hidden;
+  closeMenus();
+  els.filterMenu.hidden = !open;
+  els.filterBtn.setAttribute('aria-expanded', String(open));
+});
+for (const b of els.rowMenu.querySelectorAll('[data-action]')) {
+  b.addEventListener('click', () => rowMenuAction(b.dataset.action));
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.menu, .filter-btn, .more-act')) closeMenus();
+});
+els.listWrap.addEventListener('scroll', () => {
+  if (!els.rowMenu.hidden) closeMenus();
+});
+
 // A mouse wheel scrolls the tab strip sideways.
 els.tabs.addEventListener('wheel', (e) => {
   if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
@@ -461,14 +633,12 @@ els.selectAll.addEventListener('change', () => {
   render(state);
 });
 
-els.menuBtn.addEventListener('click', () => toggleSettings());
-els.settingsBtn.addEventListener('click', () => toggleSettings());
 els.snail.addEventListener('click', () =>
   send({ type: 'setSettings', enabled: els.snail.getAttribute('aria-pressed') !== 'true' }).then(render),
 );
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
-  if (!els.settings.hidden) toggleSettings(false);
+  if (!els.rowMenu.hidden || !els.filterMenu.hidden) closeMenus();
   else if (!els.addForm.hidden) els.addForm.hidden = true;
   else return;
   e.preventDefault();
@@ -498,5 +668,6 @@ for (const b of document.querySelectorAll('[data-mode]')) {
 
 localize();
 buildTabs();
+renderSortAndView();
 refresh();
 setInterval(refresh, REFRESH_MS);

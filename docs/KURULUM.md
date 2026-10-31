@@ -129,11 +129,13 @@ Eklentiyi açmak için sağ üstteki **mavi, aşağı oklu ikona** tıklayın. B
 
 ### Hızı sınırlamak (en temel kullanım)
 
-1. Pencerenin **sol alt köşesindeki salyangoz (🐌)** düğmesine tıklayın.
-2. Düğme **turuncu** olur ve üzerinde sınır yazar, örneğin **`4 MB/s`**.
+Pencerenin altında hız ayarlarının bulunduğu bir şerit var.
+
+1. Şeridin solundaki **"Hız sınırı"** anahtarını açın (mavi olur). Ya da en alttaki **salyangoz (🐌)** düğmesine tıklayın, ikisi aynı işi yapar.
+2. Salyangoz **turuncu** olur ve üzerinde sınır yazar, örneğin **`4 MB/s`**.
 
 Bu kadar! İndirmeleriniz artık bu hızı geçmez.
-Sınırı kaldırmak için salyangoza **tekrar** tıklayın. Düğme gri olur ve **"Sınır yok"** yazar.
+Sınırı kaldırmak için anahtarı kapatın ya da salyangoza **tekrar** tıklayın. Salyangoz gri olur ve **"Sınır yok"** yazar.
 
 > 💡 **İpucu:** Sınır açıkken eklenti ikonunun üzerinde küçük bir yazı görürsünüz. Örneğin **`2M`** = "2 MB/s sınırı açık."
 
@@ -141,11 +143,10 @@ Sınırı kaldırmak için salyangoza **tekrar** tıklayın. Düğme gri olur ve
 
 ### Sınırın değerini değiştirmek
 
-1. Pencerenin **sağ alt köşesindeki küçük ok (˄)** düğmesine tıklayın. (Sağ üstteki **≡** düğmesi de aynı işi yapar.)
-2. Bir ayar paneli açılır. Hazır düğmelerden birine tıklayın: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** veya **`10 MB/s`**.
-3. Kendi değerinizi yazmak isterseniz: **"Sınır"** kutusuna sayıyı yazın ve **Enter**'a basın.
-   Yanındaki küçük menüden birimi de seçebilirsiniz: **KB/s**, **MB/s** veya **Mbps**.
-4. Paneli kapatmak için oka tekrar tıklayın ya da klavyede **Esc**'ye basın.
+Alttaki şeritte:
+- **Yuvarlak düğmelerden** birine tıklayın: **`1`**, **`2`**, **`5`** veya **`10`** (MB/s). Tıkladığınız düğme mavi olur.
+- Kendi değerinizi yazmak isterseniz **"Sınır:"** kutusuna sayıyı yazın ve **Enter**'a basın.
+  Yanındaki küçük menüden birimi de seçebilirsiniz: **KB/s**, **MB/s** veya **Mbps**.
 
 ---
 
@@ -166,7 +167,7 @@ Sınırı kaldırmak için salyangoza **tekrar** tıklayın. Düğme gri olur ve
 
 ### "Dağıtım" ayarı: Paylaştır mı, Sırayla mı?
 
-Bu ayar da **˄** ile açılan paneldedir. Sadece **aynı anda birden fazla dosya** indirirken önemlidir.
+Bu ayar alttaki şeridin sağ ucundadır. Sadece **aynı anda birden fazla dosya** indirirken önemlidir.
 
 - **Paylaştır:** Hız bütün indirmelere **eşit** bölünür. Hepsi aynı anda ilerler.
   *Örnek: Sınır 4 MB/s, 2 indirme var → her biri ~2 MB/s.*
@@ -183,37 +184,42 @@ Soldan sağa:
 
 | Düğme | Ne yapar? |
 |---|---|
-| **+** (mavi) | **Yeni indirme.** Bir indirme linkini yapıştırıp **İndir**'e basın. |
+| **+ Yeni** (mavi) | **Yeni indirme.** Bir indirme linkini yapıştırıp **İndir**'e basın. |
 | **▶** | Seçili indirmeleri **sürdürür**. Hiçbiri seçili değilse **hepsini** sürdürür. |
 | **⏸** | Seçili indirmeleri **duraklatır**. Hiçbiri seçili değilse **hepsini** duraklatır. |
 | **🗑** | Seçili indirmeleri **listeden kaldırır.** Bilgisayarınızdaki dosyalar **silinmez.** Yanlışlıkla basmayın diye **iki kere** tıklamanız gerekir. |
 | **📁** | İndirilenler klasörünü açar. Tek bir bitmiş dosya seçiliyse o dosyayı klasörde gösterir. |
-| **Ara** kutusu | Dosya adına göre arar. |
-| **≡** | Hız sınırı ayarlarını açar. |
+| **Ara…** kutusu | Dosya adına göre arar. |
+| **≡ / ⊞** (sağ uçta) | **Liste** ya da **ızgara (kart)** görünümü. Seçiminiz hatırlanır. |
 
 ---
 
-### Sekmeler
+### Sekmeler, filtre ve sıralama
 
-Listenin üstünde sekmeler vardır: **Tümü, Aktif, Tamamlanan, Resimler, Video, Müzik, Belgeler, Arşivler.**
+Listenin üstünde sekmeler vardır: **Tümü, Aktif, Tamamlanan, Resimler, Video, Müzik, Belgeler.**
 Bir sekmeye tıklayınca sadece o türdeki indirmeler görünür. Parantez içindeki sayı, o sekmede kaç indirme olduğudur.
-Hepsi sığmazsa, sekmelerin üzerindeyken **fare tekerleğini** çevirerek yana kaydırın.
+
+Sekmelerin sağındaki **huni (⏷)** düğmesi daha fazla filtre açar: **Arşivler, Programlar, Diğer, Başarısız / iptal.**
+Bunlardan birini seçince huninin yanında adı görünür.
+
+**Sıralama:** Listenin üstündeki **Ad ↑↓** ya da **Boyut ↑↓** yazısına tıklayın.
+Birinci tıklama küçükten büyüğe (A→Z), ikinci tıklama büyükten küçüğe (Z→A), üçüncü tıklama yeniden "en yeni en üstte" sırasına döner.
 
 ---
 
 ### Listedeki her satır
 
-- **☐ Kutucuk:** O indirmeyi seçer. Üstteki düğmeler seçtiklerinize uygulanır.
+- **Satırın boş bir yerine tıklayın:** o indirme **seçilir** (soldaki kutucuk işaretlenir). Üstteki düğmeler seçtiklerinize uygulanır.
   En üstteki kutucuk, görünen **hepsini** birden seçer.
-- **Satırdaki küçük düğme:**
-  - **⏸** inen dosyayı duraklatır, **▶** devam ettirir.
-  - **📁** bitmiş dosyayı klasörde gösterir.
-  - **↻** başarısız ya da iptal edilmiş indirmeyi **yeniden dener**.
+- **Soldaki küçük simge** indirmenin durumunu gösterir: 📁 bitti, ↓ iniyor, ⏸ duraklatıldı, ⚠ başarısız, ⊗ iptal edildi. Soluk 📁 ise dosya bilgisayardan silinmiş demektir.
 - **Renkli etiket** (MP4, ISO, PDF…): dosyanın türü.
 - **Boyut** sütunu: inerken yüzde ve ilerleme çubuğu, bitince dosyanın boyutu.
-- Dosyanın **adına bir kez tıklayın:** altında indirme linki ve **Dosya sınırı** kutusu açılır.
-  **Dosya sınırı** sadece **o dosyaya** ayrı bir hız sınırı koyar. Boş bırakırsanız ayrı sınır olmaz.
-- Bitmiş bir dosyanın adına **çift tıklayın:** dosyayı klasörde gösterir.
+- **Sağdaki üç düğme:**
+  - **▶** bitmiş dosyayı **açar**. İnen dosyada **⏸** olur ve duraklatır; duraklatılmışta **▶** devam ettirir; başarısız ya da iptal edilmişte **↻** yeniden dener.
+  - **📁** bitmiş dosyayı klasörde gösterir.
+  - **⋯** daha fazla işlem: **Dosya sınırı…**, **Linki kopyala**, **Yeniden indir**, **İndirmeyi iptal et**, **Listeden kaldır** (duruma göre bazıları görünür).
+- **Dosya sınırı…** (⋯ menüsünde): sadece **o dosyaya** ayrı bir hız sınırı koyar. Boş bırakırsanız ayrı sınır olmaz.
+- Bitmiş bir dosyanın adına **çift tıklayın:** dosyayı açar.
 
 İnen dosyaların altında renkli küçük bir etiket de vardır:
 

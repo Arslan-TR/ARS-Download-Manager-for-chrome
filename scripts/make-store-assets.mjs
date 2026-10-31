@@ -18,17 +18,17 @@ const icon = `data:image/png;base64,${(await readFile(path.join(root, 'icons/ico
 const TEXT = {
   en: {
     shots: [
-      { src: 'list-en.png', title: 'Slow down big downloads<br>without cancelling them', points: ['Running downloads keep going — just slower', 'Browse and stream while files download', 'Tabs, search, pause, resume, retry'] },
-      { src: 'settings-en.png', title: 'One click on the snail<br>limits every download', points: ['Pick 1, 2, 5, 10 MB/s or your own value', 'Share the limit, or download one by one', 'Separate limit for any single file'] },
-      { src: 'dark-en.png', title: 'Light and dark theme,<br>English and Turkish', points: ['See the total speed right now', 'Free, no account, no ads', 'Sends no data anywhere'] },
+      { src: 'list-en.png', title: 'Slow down big downloads<br>without cancelling them', points: ['Running downloads keep going — just slower', 'Browse and stream while files download', 'Tabs, filters, sorting, list or grid view'] },
+      { src: 'grid-en.png', title: 'One click on the snail<br>limits every download', points: ['Pick 1, 2, 5, 10 MB/s or your own value', 'Share the limit, or download one by one', 'Separate limit for any single file'] },
+      { src: 'menu-en.png', title: 'Light and dark theme,<br>English and Turkish', points: ['See the total speed right now', 'Free, no account, no ads', 'Sends no data anywhere'] },
     ],
     tagline: 'Limit download speed without cancelling',
   },
   tr: {
     shots: [
-      { src: 'list-tr.png', title: 'Büyük indirmeleri<br>iptal etmeden yavaşlatın', points: ['Süren indirmeler devam eder, sadece yavaşlar', 'İndirme sürerken rahatça gezinin, video izleyin', 'Sekmeler, arama, duraklat, sürdür, yeniden dene'] },
-      { src: 'settings-tr.png', title: 'Salyangoza tek tıkla<br>bütün indirmeleri sınırlayın', points: ['1, 2, 5, 10 MB/s ya da kendi değeriniz', 'Hızı paylaştırın ya da sırayla indirin', 'Tek bir dosyaya ayrı sınır koyun'] },
-      { src: 'dark-tr.png', title: 'Açık ve koyu tema,<br>Türkçe ve İngilizce', points: ['Toplam anlık hızı görün', 'Ücretsiz, hesap yok, reklam yok', 'Hiçbir yere veri göndermez'] },
+      { src: 'list-tr.png', title: 'Büyük indirmeleri<br>iptal etmeden yavaşlatın', points: ['Süren indirmeler devam eder, sadece yavaşlar', 'İndirme sürerken rahatça gezinin, video izleyin', 'Sekmeler, filtre, sıralama, liste ya da ızgara'] },
+      { src: 'grid-tr.png', title: 'Salyangoza tek tıkla<br>bütün indirmeleri sınırlayın', points: ['1, 2, 5, 10 MB/s ya da kendi değeriniz', 'Hızı paylaştırın ya da sırayla indirin', 'Tek bir dosyaya ayrı sınır koyun'] },
+      { src: 'menu-tr.png', title: 'Açık ve koyu tema,<br>Türkçe ve İngilizce', points: ['Toplam anlık hızı görün', 'Ücretsiz, hesap yok, reklam yok', 'Hiçbir yere veri göndermez'] },
     ],
     tagline: 'İndirme hızını iptal etmeden sınırlayın',
   },
@@ -52,7 +52,7 @@ const shot = async ({ src, title, points }) => page(`
         ${points.map((p) => `<li style="font-size:21px;display:flex;gap:12px;align-items:center;opacity:.95"><span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;flex:none"></span>${p}</li>`).join('')}
       </ul>
     </div>
-    <img src="${await img(src)}" width="600" height="580" style="border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.45)">
+    <img src="${await img(src)}" width="630" height="540" style="border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.45)">
   </div>`, 1280, 800);
 
 const promo = (tagline) => page(`

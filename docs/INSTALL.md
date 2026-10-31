@@ -127,11 +127,13 @@ To open the extension, click the **blue down-arrow icon** at the top right. A li
 
 ### Limiting the speed (the basics)
 
-1. Click the **snail (🐌)** button in the **bottom left corner** of the window.
-2. The button turns **orange** and shows the limit, for example **`4 MB/s`**.
+At the bottom of the window there is a bar with the speed settings.
+
+1. Turn on the **"Speed limit"** switch on the left of that bar (it turns blue). Or click the **snail (🐌)** button at the very bottom; both do the same thing.
+2. The snail turns **orange** and shows the limit, for example **`4 MB/s`**.
 
 That's it! Your downloads will no longer go faster than that.
-To remove the limit, click the snail **again**. The button turns gray and says **"No limit"**.
+To remove the limit, turn the switch off or click the snail **again**. The snail turns gray and says **"No limit"**.
 
 > 💡 **Tip:** While the limit is on, you'll see small text on the extension icon. For example **`2M`** = "2 MB/s limit is on."
 
@@ -139,11 +141,10 @@ To remove the limit, click the snail **again**. The button turns gray and says *
 
 ### Changing the limit
 
-1. Click the **small arrow (˄)** in the **bottom right corner** of the window. (The **≡** button at the top right does the same.)
-2. A settings panel opens. Click one of the ready-made buttons: **`1 MB/s`**, **`2 MB/s`**, **`5 MB/s`** or **`10 MB/s`**.
-3. To type your own value: write the number in the **"Limit"** box and press **Enter**.
-   You can also choose the unit from the small menu next to it: **KB/s**, **MB/s** or **Mbps**.
-4. To close the panel, click the arrow again or press **Esc** on your keyboard.
+In the bottom bar:
+- Click one of the **round buttons**: **`1`**, **`2`**, **`5`** or **`10`** (MB/s). The one you click turns blue.
+- To type your own value, write the number in the **"Limit:"** box and press **Enter**.
+  You can also choose the unit from the small menu next to it: **KB/s**, **MB/s** or **Mbps**.
 
 ---
 
@@ -164,7 +165,7 @@ Internet plans are usually sold in **Mbps** (for example "50 Mbps"). The buttons
 
 ### The "Distribution" setting: Share or One by one?
 
-This setting is also in the panel opened with **˄**. It only matters when you download **more than one file at the same time**.
+This setting is at the right end of the bottom bar. It only matters when you download **more than one file at the same time**.
 
 - **Share:** The speed is split **equally** between all downloads. They all move forward together.
   *Example: limit is 4 MB/s, 2 downloads → about 2 MB/s each.*
@@ -181,37 +182,42 @@ From left to right:
 
 | Button | What it does |
 |---|---|
-| **+** (blue) | **New download.** Paste a download link and click **Download**. |
+| **+ New** (blue) | **New download.** Paste a download link and click **Download**. |
 | **▶** | **Resumes** the selected downloads. If nothing is selected, resumes **all** of them. |
 | **⏸** | **Pauses** the selected downloads. If nothing is selected, pauses **all** of them. |
 | **🗑** | **Removes** the selected downloads **from the list.** The files on your computer are **not deleted.** So you don't press it by accident, you have to click it **twice**. |
 | **📁** | Opens your Downloads folder. If one finished file is selected, shows that file in its folder. |
-| **Search** box | Searches by file name. |
-| **≡** | Opens the speed limit settings. |
+| **Search…** box | Searches by file name. |
+| **≡ / ⊞** (far right) | **List** or **grid (cards)** view. Your choice is remembered. |
 
 ---
 
-### Tabs
+### Tabs, filter and sorting
 
-Above the list there are tabs: **All, Active, Completed, Images, Video, Music, Documents, Archives.**
+Above the list there are tabs: **All, Active, Completed, Images, Video, Music, Documents.**
 Click a tab to see only that kind of download. The number in brackets is how many downloads are in that tab.
-If they don't all fit, hover over the tabs and turn the **mouse wheel** to scroll sideways.
+
+The **funnel (⏷)** button to the right of the tabs opens more filters: **Archives, Programs, Other, Failed / canceled.**
+When one of them is picked, its name shows next to the funnel.
+
+**Sorting:** click **Name ↑↓** or **Size ↑↓** above the list.
+The first click sorts small to large (A→Z), the second large to small (Z→A), and the third goes back to "newest first".
 
 ---
 
 ### Each row in the list
 
-- **☐ Checkbox:** selects that download. The buttons at the top act on what you select.
+- **Click an empty part of a row:** that download is **selected** (its checkbox is ticked). The buttons at the top act on what you select.
   The checkbox at the very top selects **everything** shown.
-- **The small button in the row:**
-  - **⏸** pauses a download in progress, **▶** continues it.
-  - **📁** shows a finished file in its folder.
-  - **↻** **retries** a failed or canceled download.
+- **The small icon on the left** shows the status: 📁 finished, ↓ downloading, ⏸ paused, ⚠ failed, ⊗ canceled. A faded 📁 means the file was deleted from your computer.
 - **Colored label** (MP4, ISO, PDF…): the type of file.
 - **Size** column: percentage and progress bar while downloading, the file size when finished.
-- **Click the file name once:** the download link and a **File limit** box open underneath.
-  **File limit** puts a separate speed limit on **just that file**. Leave it empty for no separate limit.
-- **Double-click** the name of a finished file: shows the file in its folder.
+- **The three buttons on the right:**
+  - **▶** **opens** a finished file. On a file that is downloading it becomes **⏸** and pauses it; on a paused one **▶** continues it; on a failed or canceled one **↻** retries it.
+  - **📁** shows a finished file in its folder.
+  - **⋯** more actions: **File limit…**, **Copy link**, **Download again**, **Cancel download**, **Remove from list** (some appear only when they apply).
+- **File limit…** (in the ⋯ menu): puts a separate speed limit on **just that file**. Leave it empty for no separate limit.
+- **Double-click** the name of a finished file: opens the file.
 
 Files that are downloading also have a small colored label:
 

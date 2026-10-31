@@ -11,7 +11,7 @@
 
 For the Chrome Web Store this local reading of download links and file names is declared as **web history** handled on the device; it is never transmitted.
 
-Permissions used: `downloads` (to see, pause, resume and start downloads), `storage` (to remember your settings), `alarms` (to keep the speed limiter running in the background).
+Permissions used: `downloads` (to see, pause, resume and start downloads), `downloads.open` (to open a finished file when you click it), `storage` (to remember your settings), `alarms` (to keep the speed limiter running in the background).
 
 Questions: open an issue at https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/issues
 
@@ -30,6 +30,6 @@ Questions: open an issue at https://github.com/Arslan-TR/ARS-Download-Manager-fo
 
 Chrome Web Store'da bu yerel okuma (indirme linkleri ve dosya adları) **web geçmişi** olarak beyan edilir; bilgisayarınızdan hiçbir yere gönderilmez.
 
-Kullanılan izinler: `downloads` (indirmeleri görmek, duraklatmak, sürdürmek ve başlatmak için), `storage` (ayarlarınızı hatırlamak için), `alarms` (hız sınırlayıcının arka planda çalışmaya devam etmesi için).
+Kullanılan izinler: `downloads` (indirmeleri görmek, duraklatmak, sürdürmek ve başlatmak için), `downloads.open` (bitmiş bir dosyaya tıkladığınızda açmak için), `storage` (ayarlarınızı hatırlamak için), `alarms` (hız sınırlayıcının arka planda çalışmaya devam etmesi için).
 
 Sorular: https://github.com/Arslan-TR/ARS-Download-Manager-for-chrome/issues adresinden bir "issue" açın.

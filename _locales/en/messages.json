@@ -11,9 +11,6 @@
   "toggleLabel": {
     "message": "Turn the speed limit on or off"
   },
-  "modeLabel": {
-    "message": "Distribution"
-  },
   "modeShare": {
     "message": "Share"
   },
@@ -129,9 +126,6 @@
   "search": {
     "message": "Search"
   },
-  "limitSettings": {
-    "message": "Speed limit settings"
-  },
   "urlPlaceholder": {
     "message": "Paste a download link (https://…)"
   },
@@ -211,5 +205,68 @@
   },
   "speedNowHint": {
     "message": "Total download speed right now (avg = last 20 seconds)"
+  },
+  "newShort": {
+    "message": "New"
+  },
+  "searchPlaceholder": {
+    "message": "Search…"
+  },
+  "viewList": {
+    "message": "List view"
+  },
+  "viewGrid": {
+    "message": "Grid view"
+  },
+  "moreFilters": {
+    "message": "More filters"
+  },
+  "tabProgram": {
+    "message": "Programs"
+  },
+  "tabOther": {
+    "message": "Other"
+  },
+  "tabFailed": {
+    "message": "Failed / canceled"
+  },
+  "sortName": {
+    "message": "Sort by name"
+  },
+  "sortSize": {
+    "message": "Sort by size"
+  },
+  "openFile": {
+    "message": "Open file"
+  },
+  "moreActions": {
+    "message": "More actions"
+  },
+  "copyLink": {
+    "message": "Copy link"
+  },
+  "copied": {
+    "message": "Link copied"
+  },
+  "redownload": {
+    "message": "Download again"
+  },
+  "removeFromList": {
+    "message": "Remove from list"
+  },
+  "cancelDownload": {
+    "message": "Cancel download"
+  },
+  "fileLimitMenu": {
+    "message": "File limit…"
+  },
+  "limitColon": {
+    "message": "Limit:"
+  },
+  "modeColon": {
+    "message": "Distribution:"
+  },
+  "openFailed": {
+    "message": "Couldn't open the file"
   }
 }
